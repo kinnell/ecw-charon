@@ -1,0 +1,57 @@
+<h1>Service Queues</h1>
+
+<hr>
+
+<%= form_for Ticket.new do |f| %>
+	
+	<%= f.text_field :name %>
+	<%= f.select :service_queue_id, ServiceQueue.all.map {|q| [q.name, q.id] } %>
+	<%= f.submit %>
+
+<% end %>
+
+<hr>
+<% @service_queues.each do |queue| %>
+	
+	<h2><%= queue.name %></h2>
+
+	<table>
+		<tr>
+			<th>#</th>
+			<th>Name</th>
+			<th>Status</th>
+			<th>Created At</th>
+			<th>Started Service At</th>
+			<th>Finished Service At</th>
+			<th>Actions</th>
+		</tr>
+
+		<% queue.tickets.each do |ticket| %>
+
+			<tr>
+				<td><%= queue.waiting_spot_of(ticket) if ticket.waiting? %></td>
+				<td><%= ticket.name %></td>
+				<td><%= ticket.status %></td>
+				<td><%= ticket.created_at %></td>
+				<td><%= ticket.started_service_at %></td>
+				<td><%= ticket.finished_service_at %></td>
+				<td>
+					<%= link_to "Start Service", ticket_path(ticket, ticket: {started_service_at: DateTime.now}), method: :patch if ticket.waiting? %> |        
+					<%= link_to "Finish Service", ticket_path(ticket, ticket: {finished_service_at: DateTime.now}), method: :patch if ticket.being_served? %> |
+					<%= link_to "Delete Ticket", ticket_path(ticket), method: :delete %>
+				</td>
+			</tr>
+		<% end %>
+
+	</table>
+
+	<%= form_for Ticket.new do |f| %>
+		<%= f.hidden_field :service_queue_id, value: queue.id %>
+		<%= f.text_field :name %>
+		<%= f.submit %>
+	<% end %>
+
+	<hr>
+
+<% end %>
+

@@ -1,16 +1,11 @@
 <h1>Service Queues</h1>
 
 <hr>
-
-<%= form_for Ticket.new do |f| %>
-	
-	<%= f.text_field :name %>
-	<%= f.select :service_queue_id, ServiceQueue.all.map {|q| [q.name, q.id] } %>
-	<%= f.submit %>
-
-<% end %>
+<%= render "new" %>
+<%= render "tickets/new" %>
 
 <hr>
+
 <% @service_queues.each do |queue| %>
 	
 	<h2><%= queue.name %></h2>

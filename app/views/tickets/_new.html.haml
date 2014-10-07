@@ -1,0 +1,13 @@
+.modal.fade{id: "new-ticket-for-queue-#{queue.id}-modal", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      = form_for queue.tickets.new, html: { class: "form-inline" } do |f|
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+          %h4.modal-title= "Create Ticket For #{queue.name}"
+        .modal-body
+          = f.text_field :name, class: "form-control"
+          = f.hidden_field :service_queue_id, value: queue.id
+        .modal-footer
+          = f.submit "Create Ticket", class: "btn btn-default"
+

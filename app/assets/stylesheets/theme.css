@@ -1,0 +1,15 @@
+body { margin: 0px; }
+
+
+.logo {
+  font-family: "Arial";
+  font-style: italic;
+  font-size: 24px;
+  letter-spacing: -0.05em;
+  color: #FFFFFF !important;
+}
+
+.navbar-default {
+  background-color: #00334c;
+  border-radius: 0px;
+}

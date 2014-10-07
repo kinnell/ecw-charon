@@ -3,6 +3,10 @@ class ServiceQueuesController < ApplicationController
     @service_queues = ServiceQueue.all
   end
   
+  def show
+    @service_queue = ServiceQueue.find(params[:id])
+  end
+
   def create
     @service_queue = ServiceQueue.create(params[:service_queue].permit(:name))
     redirect_to :back

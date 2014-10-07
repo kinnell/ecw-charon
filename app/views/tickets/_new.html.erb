@@ -1,7 +1,0 @@
-<%= form_for Ticket.new do |f| %>
-	
-	<%= f.text_field :name %>
-	<%= f.select :service_queue_id, ServiceQueue.all.map {|q| [q.name, q.id] } %>
-	<%= f.submit %>
-
-<% end %>

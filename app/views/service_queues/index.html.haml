@@ -1,0 +1,39 @@
+
+- @service_queues.each do |queue|
+
+  %h2
+    = link_to queue.name, queue
+    %button.btn.btn-success.btn-sm.pull-right{"data-toggle" => "modal", "data-target" => "#new-ticket-for-queue-#{queue.id}-modal"}= "Create Ticket"
+
+
+  %table.table.table-bordered
+    %tr
+      %th
+      %th #
+      %th Name
+      %th Status
+      %th Created At
+      %th Started Service At
+      %th Finished Service At
+      %th Waiting Time
+      %th Service Time
+      %th Actions
+
+    - queue.tickets.each do |ticket|
+      %tr
+        %td= ticket.starred ? "<i class='fa fa-star'></i>".html_safe : "<i class='fa fa-star-o'></i>".html_safe
+        %td= queue.waiting_spot_of(ticket) if ticket.waiting?
+        %td= ticket.name
+        %td= ticket.status
+        %td= ticket.created_at.strftime("%l:%M %p")
+        %td= ticket.started_service_at && ticket.started_service_at.strftime("%l:%M %p")
+        %td= ticket.finished_service_at.strftime("%l:%M %p") if ticket.finished_service_at
+        %td= ticket.print_in_minutes(ticket.waiting_time) if ticket.waiting_time
+        %td= ticket.print_in_minutes(ticket.service_time) if ticket.service_time
+        %td
+          = link_to "<i class='fa fa-play'></i>".html_safe, ticket_path(ticket, ticket: {started_service_at: DateTime.now}), method: :patch, class: "btn btn-success btn-xs" if ticket.waiting?
+          = link_to "<i class='fa fa-check'></i>".html_safe, ticket_path(ticket, ticket: {finished_service_at: DateTime.now}), method: :patch, class: "btn btn-warning btn-xs" if ticket.being_served?
+          = link_to "<i class='fa fa-trash'></i>".html_safe, ticket_path(ticket), method: :delete, class: "btn btn-danger btn-xs", confirm: "Are you sure?"
+
+  = render "tickets/new", queue: queue
+  %hr

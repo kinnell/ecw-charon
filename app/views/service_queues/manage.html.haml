@@ -1,6 +1,8 @@
 %h2
-  = link_to @service_queue.name, @service_queue
-  %button.btn.btn-success.btn-sm.pull-right{"data-toggle" => "modal", "data-target" => "#new-ticket-for-queue-#{@service_queue.id}-modal"}= "Create Ticket"
+  = @service_queue.name
+  = link_to service_queue_path(@service_queue), class: "btn btn-info pull-right", style: "margin-left: 5px;" do
+    %i.fa.fa-eye
+  %button.btn.btn-success.pull-right{"data-toggle" => "modal", "data-target" => "#new-ticket-for-queue-#{@service_queue.id}-modal"}= "Create Ticket"
 
 
 %table.table.table-bordered
@@ -28,9 +30,14 @@
       %td.text-center= ticket.print_in_minutes(ticket.waiting_time) if ticket.waiting_time
       %td.text-center= ticket.print_in_minutes(ticket.service_time) if ticket.service_time
       %td
-        = link_to "<i class='fa fa-play'></i>".html_safe, ticket_path(ticket, ticket: {started_service_at: DateTime.now}), method: :patch, class: "btn btn-success btn-xs" if ticket.waiting?
-        = link_to "<i class='fa fa-check'></i>".html_safe, ticket_path(ticket, ticket: {finished_service_at: DateTime.now}), method: :patch, class: "btn btn-warning btn-xs" if ticket.being_served?
-        = link_to "<i class='fa fa-trash'></i>".html_safe, ticket_path(ticket), method: :delete, class: "btn btn-danger btn-xs", confirm: "Are you sure?"
+        = link_to ticket_path(ticket, ticket: {started_service_at: DateTime.now}), method: :patch, class: "btn btn-success btn-xs", disabled: (ticket.waiting?).! do
+          %i.fa.fa-play
 
+        = link_to ticket_path(ticket, ticket: {finished_service_at: DateTime.now}), method: :patch, class: "btn btn-warning btn-xs", disabled: (ticket.being_served?).! do
+          %i.fa.fa-check
+
+        = link_to ticket_path(ticket), method: :delete, class: "btn btn-danger btn-xs", confirm: "Are you sure?" do
+          %i.fa.fa-trash
+  
 = render "tickets/new", queue: @service_queue
 %hr

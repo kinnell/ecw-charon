@@ -12,7 +12,8 @@
     %nav.navbar.navbar-default{role: "navigation"}
       .container
         .navbar-header.pull-right
-          %a.navbar-brand.logo= "eClinicalWorks"
+          = link_to root_path do
+            .navbar-brand.logo= "eClinicalWorks"
     
     .container
       = yield

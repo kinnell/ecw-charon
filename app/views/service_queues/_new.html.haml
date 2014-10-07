@@ -1,4 +1,13 @@
-- form_for ServiceQueue.new, html: { class: "form-inline" } do |f|
-  = f.text_field :name, class: "form-control"
-  = f.submit "Create Queue", class: "btn btn-default"
+
+.modal.fade{id: "new-queue-modal", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-sm
+    .modal-content
+      = form_for ServiceQueue.new do |f|
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+          %h4.modal-title.text-center= "Create new queue"
+        .modal-body
+          = f.text_field :name, class: "form-control", placeholder: "Name"
+        .modal-footer
+          = f.submit "Create Queue", class: "btn btn-success btn-block"
 

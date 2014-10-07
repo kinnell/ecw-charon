@@ -1,4 +1,6 @@
-%h2 Queues
+%h2
+  Queues
+  %button.btn.btn-success.pull-right{"data-toggle" => "modal", "data-target" => "#new-queue-modal"}= "Create Queue"
 
 %table.table.table-bordered
   %tr
@@ -22,3 +24,6 @@
           %i.fa.fa-gear
         = link_to service_queue_path(queue), class: "btn btn-info btn-xs" do
           %i.fa.fa-eye
+
+= render "new"
+%hr

@@ -6,6 +6,10 @@ class ServiceQueuesController < ApplicationController
   def show
     @service_queue = ServiceQueue.find(params[:id])
   end
+  
+  def manage
+    @service_queue = ServiceQueue.find(params[:id])
+  end
 
   def create
     @service_queue = ServiceQueue.create(params[:service_queue].permit(:name))

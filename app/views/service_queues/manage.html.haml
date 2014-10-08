@@ -36,8 +36,13 @@
         = link_to ticket_path(ticket, ticket: {finished_service_at: DateTime.now}), method: :patch, class: "btn btn-warning btn-xs", disabled: (ticket.being_served?).! do
           %i.fa.fa-check
 
-        = link_to ticket_path(ticket), method: :delete, class: "btn btn-danger btn-xs", confirm: "Are you sure?" do
+        %button.btn.btn-warning.btn-xs{"data-toggle" => "modal", "data-target" => "#edit-ticket-#{ticket.id}-modal"}
+          %i.fa.fa-pencil
+
+        = link_to ticket_path(ticket), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: "Are you sure?" } do
           %i.fa.fa-trash
-  
+
+        = render "tickets/edit", ticket: ticket
+
 = render "tickets/new", queue: @service_queue
 %hr

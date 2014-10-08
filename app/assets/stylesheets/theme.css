@@ -3,7 +3,6 @@ body {
   font-family: "Open Sans";
 }
 
-
 .logo {
   font-family: "Arial";
   font-style: italic;
@@ -20,3 +19,5 @@ body {
 .btn.disabled, .btn[disabled], fieldset[disabled] .btn {
   opacity: 0.3;
 }
+
+.modal .modal-dialog { padding-top: 5% }

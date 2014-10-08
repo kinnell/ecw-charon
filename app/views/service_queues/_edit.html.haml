@@ -1,0 +1,12 @@
+.modal.fade{id: "edit-queue-#{queue.id}-modal", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-sm
+    .modal-content
+      = form_for queue do |f|
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+          %h4.modal-title.text-center= "Edit <b>#{queue.name}</b>".html_safe
+        .modal-body
+          = f.text_field :name, class: "form-control"
+        .modal-footer
+          = f.submit "Save", class: "btn btn-success btn-block"
+

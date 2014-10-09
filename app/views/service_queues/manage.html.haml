@@ -11,38 +11,39 @@
 
 %hr
 
-%h4 Active Tickets
+%h4.text-center
+  %i.fa.fa-refresh
+  Being Served
 
 .table-responsive
   %table.table.table-bordered.table-hover
     %thead
       %tr
-        %th
-        %th Name
-        %th.text-center Specialty
-        %th.text-center Status
+        %th{style: "width: 5%"}
+        %th{style: "width: 25%"} Name
+        %th.text-center{style: "width: 7.5%"} Specialty
         %th.text-center Created At
         %th.text-center Waiting Time
-        %th.text-center Est. Wait Time
         %th.text-center Started Service At
-        %th.text-center Service Time
-        %th Actions
+        %th.text-center Current Service Time
+        %th{style: "width: 15%"} Actions
 
     %tbody
-      - @service_queue.tickets.not_served_sorted.each do |ticket|
-        %tr{class: ticket.color}
+      - @service_queue.tickets.being_served.each do |ticket|
+        %tr.success
           %td
             = render "tickets/star", ticket: ticket
             = ticket.waiting_spot
-          %td= ticket.name.truncate(40)
+          %td
+            = ticket.name.truncate(40)
+            - if ticket.note
+              %i.fa.fa-file-text-o.pull-right{style: "opacity: 0.5"}
           %td.text-center
             %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
-          %td.text-center= ticket.status
           %td.text-center= ticket.created_at.strftime("%l:%M %p")
           %td.text-center= time_ago_in_words(Time.now - ticket.waiting_time)
-          %td.text-center= time_ago_in_words(Time.now - ticket.estimated_waiting_time) if ticket.waiting?
           %td.text-center= ticket.started_service_at && ticket.started_service_at.strftime("%l:%M %p")
-          %td.text-center= time_ago_in_words(Time.now - ticket.service_time) if ticket.service_time
+          %td.text-center= time_ago_in_words(Time.now - ticket.service_time)
           %td
             = link_to ticket_path(ticket, ticket: {started_service_at: DateTime.now}), method: :patch, class: "btn btn-success btn-xs", disabled: (ticket.waiting?).! do
               %i.fa.fa-play
@@ -55,37 +56,84 @@
             = render "tickets/edit", ticket: ticket
 %hr
 
-%h4 Served Tickets
+%h4.text-center
+  %i.fa.fa-clock-o 
+  Waiting
+
 
 .table-responsive
   %table.table.table-bordered.table-hover
     %thead
       %tr
-        %th
-        %th Name
-        %th.text-center Specialty
-        %th.text-center Status
+        %th{style: "width: 5%"}
+        %th{style: "width: 25%"} Name
+        %th.text-center{style: "width: 7.5%"} Specialty
+        %th.text-center Created At
+        %th.text-center Waiting Time
+        %th.text-center Est. Wait Time
+        %th{style: "width: 15%"} Actions
+
+    %tbody
+      - @service_queue.tickets.waiting.each do |ticket|
+        %tr{class: ticket.color}
+          %td
+            = render "tickets/star", ticket: ticket
+            = ticket.waiting_spot
+          %td
+            = ticket.name.truncate(40)
+            - unless ticket.note.blank?
+              %i.fa.fa-file-text-o.pull-right{style: "opacity: 0.5"}
+          %td.text-center
+            %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
+          %td.text-center= ticket.created_at.strftime("%l:%M %p")
+          %td.text-center= time_ago_in_words(Time.now - ticket.waiting_time)
+          %td.text-center= time_ago_in_words(Time.now - ticket.estimated_waiting_time)
+          %td
+            = link_to ticket_path(ticket, ticket: {started_service_at: DateTime.now}), method: :patch, class: "btn btn-success btn-xs", disabled: (ticket.waiting?).! do
+              %i.fa.fa-play
+            = link_to ticket_path(ticket, ticket: {finished_service_at: DateTime.now}), method: :patch, class: "btn btn-info btn-xs", disabled: (ticket.being_served?).! do
+              %i.fa.fa-check
+            %button.btn.btn-warning.btn-xs{"data-toggle" => "modal", "data-target" => "#edit-ticket-#{ticket.id}-modal"}
+              %i.fa.fa-pencil
+            = link_to ticket_path(ticket), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: "Are you sure?" } do
+              %i.fa.fa-trash
+            = render "tickets/edit", ticket: ticket
+%hr
+
+%h4.text-center
+  %i.fa.fa-check-circle
+  Served
+
+.table-responsive
+  %table.table.table-bordered.table-hover
+    %thead
+      %tr
+        %th{style: "width: 5%"}
+        %th{style: "width: 25%"} Name
+        %th.text-center{style: "width: 7.5%"} Specialty
         %th.text-center Created At
         %th.text-center Waiting Time
         %th.text-center Started Service At
         %th.text-center Service Time
-        %th.text-center Finished Service At
-        %th Actions
+        %th.text-center Finished At
+        %th{style: "width: 15%"} Actions
 
     %tbody
       - @service_queue.tickets.served.each do |ticket|
         %tr.active
           %td 
             = render "tickets/star", ticket: ticket
-          %td= ticket.name.truncate(40)
+          %td
+            = ticket.name.truncate(40)
+            - unless ticket.note.blank?
+              %i.fa.fa-file-text-o.pull-right{style: "opacity: 0.5"}
           %td.text-center
             %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
-          %td.text-center= ticket.status
           %td.text-center= ticket.created_at.strftime("%l:%M %p")
           %td.text-center= time_ago_in_words(Time.now - ticket.waiting_time.seconds) 
           %td.text-center= ticket.started_service_at && ticket.started_service_at.strftime("%l:%M %p")
           %td.text-center= time_ago_in_words(Time.now - ticket.service_time.seconds)
-          %td.text-center= ticket.finished_service_at.strftime("%l:%M %p") if ticket.finished_service_at
+          %td.text-center= ticket.finished_service_at.strftime("%l:%M %p")
           %td
             = link_to ticket_path(ticket, ticket: {started_service_at: DateTime.now}), method: :patch, class: "btn btn-success btn-xs", disabled: (ticket.waiting?).! do
               %i.fa.fa-play

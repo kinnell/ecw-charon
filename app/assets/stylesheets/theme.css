@@ -3,6 +3,9 @@ body {
   font-family: "Open Sans";
 }
 
+a, a:hover { text-decoration: none !important; }
+
+
 .logo {
   font-family: "Arial";
   font-style: italic;
@@ -28,8 +31,8 @@ body {
   -moz-transition: all .25s ease-in-out;
   -o-transition: all .25s ease-in-out;
   transition: all .25s ease-in-out;
-
 }
+
 
 .priority-star.fa-star {
   color: #FFD76E;
@@ -46,6 +49,11 @@ table > thead > tr > th {
   border: 1px solid #004060 !important;
   color: white;
   font-weight: 300;
+  vertical-align: middle !important;
+}
+
+table > tbody > tr > td {
+  vertical-align: middle !important;
 }
 
 table {
@@ -107,4 +115,13 @@ hr, hr:before {
 hr:after {
   background: #fff;
 }
+
+h4 .fa {
+  color: #666;
+  margin-right: 5px;
+}
+
+h4 { margin-bottom: 15px; }
+
+
 

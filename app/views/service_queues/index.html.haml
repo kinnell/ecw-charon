@@ -8,18 +8,18 @@
   %table.table.table-bordered.table-hover
     %thead
       %tr
-        %th.col-md-2 Name
-        %th.col-md-2 Specialties
-        %th.col-md-1.text-center Total Tickets
-        %th.col-md-1.text-center Waiting
-        %th.col-md-1.text-center Avg Wait Time
-        %th.col-md-1.text-center Being Served
-        %th.col-md-1.text-center Finished
-        %th.col-md-2 Actions
+        %th{style: "width: 15%"} Name
+        %th Specialties
+        %th.text-center Total Tickets
+        %th.text-center Waiting
+        %th.text-center Avg Wait Time
+        %th.text-center Being Served
+        %th.text-center Avg Service Time
+        %th.text-center Finished
+        %th{style: "width: 15%"} Actions
 
-    - @service_queues.each do |queue|
-
-      %tbody
+    %tbody
+      - @service_queues.each do |queue|
         %tr
           %td= link_to queue.name, manage_service_queue_path(queue)
           %td
@@ -27,8 +27,9 @@
               %span.label.label-primary= specialty.upcase
           %td.text-center= queue.tickets.count
           %td.text-center= queue.tickets.waiting.count
-          %td.text-center= time_ago_in_words(Time.now - queue.average_waiting_time)
+          %td.text-center= time_ago_in_words(Time.now - queue.average_waiting_time) if queue.tickets.waiting.any?
           %td.text-center= queue.tickets.being_served.count
+          %td.text-center= time_ago_in_words(Time.now - queue.average_service_time) if queue.tickets.served.any?
           %td.text-center= queue.tickets.served.count
           %td
             = link_to manage_service_queue_path(queue), class: "btn btn-primary btn-xs" do

@@ -12,8 +12,6 @@ class Ticket < ActiveRecord::Base
   scope :starred, -> { where(starred: true) }
   scope :not_starred, -> { where(starred: false) }
 
-  scope :not_served_sorted, -> { being_served + waiting.merge(starred) + waiting.merge(not_starred) }
-
   def status
     if finished_service_at
       "Served"

@@ -13,5 +13,9 @@ class ServiceQueue < ActiveRecord::Base
     (total_waiting_time + (initial_waiting_time * 60 * compound_factor)) / (tickets.not_waiting.count + compound_factor)
   end
 
+  def average_service_time
+    tickets.served.any? ? tickets.served.inject(0) { |sum, t| sum + t.service_time } / tickets.served.count : 0
+  end
+
 
 end

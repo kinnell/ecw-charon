@@ -30,13 +30,13 @@
           %td.text-center= queue.tickets.served.count
           %td
             = link_to manage_service_queue_path(queue), class: "btn btn-primary btn-xs" do
-              %i.fa.fa-gear
+              %i.fa.fa-list-ol
 
             = link_to service_queue_path(queue), class: "btn btn-info btn-xs" do
               %i.fa.fa-eye
 
             %button.btn.btn-warning.btn-xs{"data-toggle" => "modal", "data-target" => "#edit-queue-#{queue.id}-modal"}
-              %i.fa.fa-pencil
+              %i.fa.fa-gear
 
             = link_to service_queue_path(queue), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: "Are you sure?" } do
               %i.fa.fa-trash

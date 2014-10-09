@@ -7,6 +7,7 @@
           %h4.modal-title.text-center= "Create a ticket for <b>#{queue.name}</b>".html_safe
         .modal-body
           = f.text_field :name, class: "form-control", placeholder: "Name"
+          = f.text_area :note, class: "form-control", placeholder: "Comment (optional)"
           = f.hidden_field :service_queue_id, value: queue.id
         .modal-footer
           = f.submit "Create Ticket", class: "btn btn-success btn-block"

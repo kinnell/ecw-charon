@@ -15,3 +15,8 @@
           %td= ticket.name
           %td= ticket.status
 
+:javascript
+  $(document).ready(function() {
+    setInterval(function() { location.reload(); }, ("#{escape_javascript (@service_queue.refresh_interval*60000).to_s}"));
+  });
+                                                

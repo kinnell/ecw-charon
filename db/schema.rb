@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141009070949) do
+ActiveRecord::Schema.define(version: 20141009081225) do
 
   create_table "service_queues", force: true do |t|
-    t.string   "name",        null: false
+    t.string   "name",                         null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "specialties"
+    t.integer  "refresh_interval", default: 1
   end
 
   create_table "tickets", force: true do |t|

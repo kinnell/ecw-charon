@@ -23,6 +23,7 @@
         %th.text-center Status
         %th.text-center Created At
         %th.text-center Waiting Time
+        %th.text-center Est. Wait Time
         %th.text-center Started Service At
         %th.text-center Service Time
         %th Actions
@@ -39,6 +40,7 @@
           %td.text-center= ticket.status
           %td.text-center= ticket.created_at.strftime("%l:%M %p")
           %td.text-center= time_ago_in_words(Time.now - ticket.waiting_time)
+          %td.text-center= time_ago_in_words(Time.now - ticket.estimated_waiting_time) if ticket.waiting?
           %td.text-center= ticket.started_service_at && ticket.started_service_at.strftime("%l:%M %p")
           %td.text-center= time_ago_in_words(Time.now - ticket.service_time) if ticket.service_time
           %td

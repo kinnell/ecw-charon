@@ -6,7 +6,9 @@ class Ticket < ActiveRecord::Base
   scope :waiting, -> { where(started_service_at: nil).order("starred DESC, created_at") }
   scope :being_served, -> { where.not(started_service_at: nil).where(finished_service_at: nil).order(:started_service_at) }
   scope :served, -> { where.not(finished_service_at: nil).order(:finished_service_at).order(:finished_service_at) }
-  
+
+  scope :not_waiting, -> { being_served + served }
+
   scope :starred, -> { where(starred: true) }
   scope :not_starred, -> { where(starred: false) }
 
@@ -48,12 +50,16 @@ class Ticket < ActiveRecord::Base
     "#{(time_in_seconds/60).ceil} min"
   end
 
-  def waiting_spot()
+  def waiting_spot
     service_queue.tickets.waiting.index(self)+1 if waiting?
   end
 
-  def first_in_waiting?()
+  def first_in_waiting?
     waiting_spot == 1
+  end
+
+  def estimated_waiting_time
+    service_queue.average_waiting_time * waiting_spot if waiting?
   end
 
 end

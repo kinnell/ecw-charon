@@ -10,6 +10,7 @@
           = f.text_field :name, class: "form-control", placeholder: "Name", required: true
           = f.text_field :specialties, class: "form-control", placeholder: "Specialties (optional)"
           = f.number_field :refresh_interval, class: "form-control"
+          = f.number_field :initial_waiting_time, class: "form-control"
         .modal-footer
           = f.submit "Create Queue", class: "btn btn-success btn-block"
 

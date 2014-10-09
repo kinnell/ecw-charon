@@ -27,6 +27,12 @@ class Ticket < ActiveRecord::Base
   def being_served?() status == "Being Served" end
   def served?() status == "Served" end
 
+  def color
+    if first_in_waiting? then "warning"
+    elsif being_served? then "success"
+    elsif served? then "active" end
+  end
+
   def waiting_time
     if started_service_at then (started_service_at - created_at) else (Time.now - created_at) end
   end

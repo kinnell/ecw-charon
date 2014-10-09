@@ -33,10 +33,12 @@ body {
 
 .priority-star.fa-star {
   color: #FFD76E;
+  margin-right: 5px;
 }
 
 .priority-star.fa-star-o {
   color: #CCCCCC;
+  margin-right: 5px;
 }
 
 table > thead > tr > th {
@@ -57,3 +59,52 @@ table {
 @-moz-document url-prefix() {
   fieldset { display: table-cell; }
 }
+
+hr {
+  opacity: 0.5;
+  border: 0;
+  height: 1px;
+  position: relative;
+  margin: 2em 0;
+  clear: both;
+  
+  -webkit-transform: rotate(180deg);     /* Chrome and other webkit browsers */
+  -moz-transform: rotate(180deg);        /* FF */
+  -o-transform: rotate(180deg);          /* Opera */
+  -ms-transform: rotate(180deg);         /* IE9 */
+  transform: rotate(180deg);             /* W3C complaint browsers */
+
+  /* IE8 and below */
+  filter: progid:DXImageTransform.Microsoft.Matrix(M11=-1, M12=0, M21=0, M22=-1, DX=0, DY=0, SizingMethod='auto expand');
+}
+
+hr:before {
+  top: -0.5em;
+  height: 1em;
+}
+
+hr:after {
+  content:'';
+  height: 0.5em;
+  top: 1px;
+}
+
+hr:before, hr:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+}
+
+hr, hr:before {
+  background: -moz-radial-gradient(center, ellipse cover, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 75%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 75%, color-stop(0%,rgba(0,0,0,0.1)), color-stop(75%,rgba(0,0,0,0)));
+  background: -webkit-radial-gradient(center, ellipse cover, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 75%);
+  background: -o-radial-gradient(center, ellipse cover, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 75%);
+  background: -ms-radial-gradient(center, ellipse cover, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 75%);
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 75%);
+}
+
+hr:after {
+  background: #fff;
+}
+

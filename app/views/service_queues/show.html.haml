@@ -1,19 +1,19 @@
-%h2= @service_queue.name
+%h1.text-center= @service_queue.name
 
 .table-responsive
   %table.table.table-bordered
     %thead
       %tr
-        %th= "#"
+        %th.col-md-1.text-center= "#"
         %th= "Name"
-        %th= "Status"
+        %th.col-md-1.text-center= "Status"
 
     - @service_queue.tickets.waiting.sort_by_starred.each do |ticket|
       %tbody
-        %tr{class: ("success" if ticket.first_in_waiting?)}
-          %td= ticket.waiting_spot
+        %tr{class: ("warning" if ticket.first_in_waiting?)}
+          %td.text-center= ticket.waiting_spot
           %td= ticket.name
-          %td= ticket.status
+          %td.text-center= ticket.status
 
 :javascript
   $(document).ready(function() {

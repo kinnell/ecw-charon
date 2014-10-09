@@ -13,8 +13,7 @@
   %table.table.table-bordered.table-hover
     %thead
       %tr
-        %th.text-center
-        %th.text-center #
+        %th
         %th Name
         %th.text-center Specialty
         %th.text-center Status
@@ -26,10 +25,11 @@
 
     %tbody
       - @service_queue.tickets.not_served.sorted.each do |ticket|
-        %tr{class: ("success" if ticket.first_in_waiting?)}
-          %td.text-center= render "tickets/star", ticket: ticket
-          %td.text-center= ticket.waiting_spot
-          %td= ticket.name
+        %tr{class: ticket.color}
+          %td
+            = render "tickets/star", ticket: ticket
+            = ticket.waiting_spot
+          %td= ticket.name.truncate(40)
           %td.text-center
             %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
           %td.text-center= ticket.status
@@ -55,28 +55,31 @@
   %table.table.table-bordered.table-hover
     %thead
       %tr
+        %th
         %th Name
         %th.text-center Specialty
         %th.text-center Status
         %th.text-center Created At
-        %th.text-center Started Service At
-        %th.text-center Finished Service At
         %th.text-center Waiting Time
+        %th.text-center Started Service At
         %th.text-center Service Time
+        %th.text-center Finished Service At
         %th Actions
 
     %tbody
       - @service_queue.tickets.served.sorted.each do |ticket|
         %tr.active
-          %td= ticket.name
+          %td 
+            = render "tickets/star", ticket: ticket
+          %td= ticket.name.truncate(40)
           %td.text-center
             %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
           %td.text-center= ticket.status
           %td.text-center= ticket.created_at.strftime("%l:%M %p")
-          %td.text-center= ticket.started_service_at && ticket.started_service_at.strftime("%l:%M %p")
-          %td.text-center= ticket.finished_service_at.strftime("%l:%M %p") if ticket.finished_service_at
           %td.text-center= time_ago_in_words(Time.now - ticket.waiting_time.seconds) 
+          %td.text-center= ticket.started_service_at && ticket.started_service_at.strftime("%l:%M %p")
           %td.text-center= time_ago_in_words(Time.now - ticket.service_time.seconds)
+          %td.text-center= ticket.finished_service_at.strftime("%l:%M %p") if ticket.finished_service_at
           %td
             = link_to ticket_path(ticket, ticket: {started_service_at: DateTime.now}), method: :patch, class: "btn btn-success btn-xs", disabled: (ticket.waiting?).! do
               %i.fa.fa-play

@@ -4,3 +4,9 @@
       %i.fa.fa-star.priority-star
     - else
       %i.fa.fa-star-o.priority-star
+- elsif ticket.being_served?
+  .text-center
+    %i.fa.fa-refresh{style: "color: green"}
+- elsif ticket.served?
+  .text-center
+    %i.fa.fa-check{style: "color: #666"}

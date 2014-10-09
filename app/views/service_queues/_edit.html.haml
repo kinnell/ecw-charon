@@ -6,10 +6,14 @@
           %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
           %h4.modal-title.text-center= "Edit <b>#{queue.name}</b>".html_safe
         .modal-body
+          %h6 Queue Name:
           = f.text_field :name, class: "form-control", required: true
+          %h6 Specialties:
           = f.text_field :specialties, class: "form-control"
-          = f.number_field :refresh_interval, class: "form-control"
+          %h6 Initial Waiting Time (min):
           = f.number_field :initial_waiting_time, class: "form-control"
+          %h6 Published Page Refresh Interval (min):
+          = f.number_field :refresh_interval, class: "form-control"
         .modal-footer
           = f.submit "Save", class: "btn btn-success btn-block"
 

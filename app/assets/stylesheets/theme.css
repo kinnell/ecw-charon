@@ -25,6 +25,8 @@ a, a:hover { text-decoration: none !important; }
 
 .modal .modal-dialog { padding-top: 5% }
 
+.modal .modal-body { padding-top: 0px; padding-bottom: 10px; }
+
 .priority-star.fa-star-o:hover {
   color: #FFD76E;
   -webkit-transition: all .25s ease-in-out;
@@ -123,5 +125,5 @@ h4 .fa {
 
 h4 { margin-bottom: 15px; }
 
-
+h6 { font-weight: 600; margin-top: 15px; }
 

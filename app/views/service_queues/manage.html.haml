@@ -5,10 +5,10 @@
       
   %button.btn.btn-warning.pull-right{"data-toggle" => "modal", "data-target" => "#edit-queue-#{@service_queue.id}-modal", style: "margin-left: 5px"}
     %i.fa.fa-gear
-  = render "edit", queue: @service_queue
 
   %button.btn.btn-success.pull-right{"data-toggle" => "modal", "data-target" => "#new-ticket-for-queue-#{@service_queue.id}-modal"}= "Create Ticket"
 
+= render "edit", queue: @service_queue
 %hr
 
 %h4.text-center

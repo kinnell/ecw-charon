@@ -1,4 +1,3 @@
-
 .modal.fade{id: "new-queue-modal", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
   .modal-dialog.modal-sm
     .modal-content
@@ -7,10 +6,14 @@
           %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
           %h4.modal-title.text-center= "Create new queue"
         .modal-body
-          = f.text_field :name, class: "form-control", placeholder: "Name", required: true
-          = f.text_field :specialties, class: "form-control", placeholder: "Specialties (optional)"
-          = f.number_field :refresh_interval, class: "form-control"
+          %h6 Queue Name:
+          = f.text_field :name, class: "form-control", required: true
+          %h6 Specialties:
+          = f.text_field :specialties, class: "form-control"
+          %h6 Initial Waiting Time:
           = f.number_field :initial_waiting_time, class: "form-control"
+          %h6 Published Page Refresh Interval:
+          = f.number_field :refresh_interval, class: "form-control"
         .modal-footer
           = f.submit "Create Queue", class: "btn btn-success btn-block"
 

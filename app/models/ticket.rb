@@ -6,9 +6,12 @@ class Ticket < ActiveRecord::Base
   default_scope -> { order(:created_at) }
   scope :waiting, -> { where(started_service_at: nil) }
   scope :being_served, -> { where.not(started_service_at: nil).where(finished_service_at: nil) }
+  scope :not_served, -> { where(finished_service_at: nil) }
   scope :served, -> { where.not(finished_service_at: nil) }
   scope :starred, -> { where(starred: true) }
   scope :not_starred, -> { where(starred: false) }
+  scope :sort_by_starred, -> { starred + not_starred } 
+  scope :sorted, -> { served + being_served + waiting.merge(starred) + waiting.merge(not_starred) }
 
   def status
     if finished_service_at
@@ -34,6 +37,14 @@ class Ticket < ActiveRecord::Base
 
   def print_in_minutes(time_in_seconds)
     "#{(time_in_seconds/60).ceil} min"
+  end
+
+  def waiting_spot()
+    service_queue.tickets.waiting.sort_by_starred.index(self)+1 if waiting?
+  end
+
+  def first_in_waiting?()
+    waiting_spot == 1
   end
 
 end

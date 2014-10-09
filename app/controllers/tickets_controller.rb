@@ -6,7 +6,7 @@ class TicketsController < ApplicationController
 
   def update
     @ticket = Ticket.find(params[:id])
-    @ticket.update(params[:ticket].permit(:started_service_at, :finished_service_at, :name))
+    @ticket.update(params[:ticket].permit(:started_service_at, :finished_service_at, :name, :starred))
     redirect_to :back
   end
 

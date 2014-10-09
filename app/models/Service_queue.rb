@@ -3,8 +3,4 @@ class ServiceQueue < ActiveRecord::Base
 
   has_many :tickets, dependent: :destroy
 
-  def waiting_spot_of(ticket)
-    self.tickets.waiting.index(ticket)+1 if ticket.waiting?
-  end
-
 end

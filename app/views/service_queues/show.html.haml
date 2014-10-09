@@ -1,14 +1,16 @@
 %h2= @service_queue.name
 
 %table.table.table-bordered
-  %tr
-    %th= "#"
-    %th= "Name"
-    %th= "Status"
-
-  - @service_queue.tickets.waiting.each do |ticket|
+  %thead
     %tr
-      %td= @service_queue.waiting_spot_of(ticket) if ticket.waiting?
-      %td= ticket.name
-      %td= ticket.status
+      %th= "#"
+      %th= "Name"
+      %th= "Status"
+
+  - @service_queue.tickets.waiting.sort_by_starred.each do |ticket|
+    %tbody
+      %tr{class: ("success" if ticket.first_in_waiting?)}
+        %td= ticket.waiting_spot
+        %td= ticket.name
+        %td= ticket.status
 

@@ -1,0 +1,6 @@
+- if ticket.waiting?
+  = link_to ticket_path(ticket, ticket: { starred: ticket.starred.! }), method: :patch do
+    - if ticket.starred?
+      %i.fa.fa-star.priority-star
+    - else
+      %i.fa.fa-star-o.priority-star

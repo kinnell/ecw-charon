@@ -1,4 +1,4 @@
-body { 
+body {
   margin: 0px;
   font-family: "Open Sans";
 }
@@ -21,3 +21,33 @@ body {
 }
 
 .modal .modal-dialog { padding-top: 5% }
+
+.priority-star.fa-star-o:hover {
+  color: #FFD76E;
+  -webkit-transition: all .25s ease-in-out;
+  -moz-transition: all .25s ease-in-out;
+  -o-transition: all .25s ease-in-out;
+  transition: all .25s ease-in-out;
+
+}
+
+.priority-star.fa-star {
+  color: #FFD76E;
+}
+
+.priority-star.fa-star-o {
+  color: #CCCCCC;
+}
+
+table > thead > tr > th {
+  background-color: #00334c;
+  border: 1px solid #00334c !important;
+  color: white;
+  font-weight: 300;
+}
+
+table {
+  border-radius: 4px !important;
+}
+
+.btn-xs { margin-left: 3px; margin-right: 3px; }

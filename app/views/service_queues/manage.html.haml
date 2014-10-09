@@ -26,7 +26,8 @@
           %td.text-center= render "tickets/star", ticket: ticket
           %td.text-center= ticket.waiting_spot
           %td= ticket.name
-          %td.text-center= ticket.specialty
+          %td.text-center
+            %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
           %td.text-center= ticket.status
           %td.text-center= ticket.created_at.strftime("%l:%M %p")
           %td.text-center= ticket.started_service_at && ticket.started_service_at.strftime("%l:%M %p")
@@ -69,7 +70,8 @@
           %td.text-center
           %td.text-center
           %td= ticket.name
-          %td.text-center= ticket.specialty
+          %td.text-center
+            %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
           %td.text-center= ticket.status
           %td.text-center= ticket.created_at.strftime("%l:%M %p")
           %td.text-center= ticket.started_service_at && ticket.started_service_at.strftime("%l:%M %p")

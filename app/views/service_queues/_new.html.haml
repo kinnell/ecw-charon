@@ -7,7 +7,8 @@
           %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
           %h4.modal-title.text-center= "Create new queue"
         .modal-body
-          = f.text_field :name, class: "form-control", placeholder: "Name"
+          = f.text_field :name, class: "form-control", placeholder: "Name", required: true
+          = f.text_field :specialties, class: "form-control", placeholder: "Specialties (optional)"
         .modal-footer
           = f.submit "Create Queue", class: "btn btn-success btn-block"
 

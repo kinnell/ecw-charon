@@ -2,39 +2,42 @@
   Queues
   %button.btn.btn-success.pull-right{"data-toggle" => "modal", "data-target" => "#new-queue-modal"}= "Create Queue"
 
-%table.table.table-bordered.table-hover
-  %thead
-    %tr
-      %th.col-md-2 Name
-      %th.col-md-2.text-center Total Tickets
-      %th.col-md-2.text-center Waiting
-      %th.col-md-2.text-center Being Served
-      %th.col-md-2.text-center Finished
-      %th.col-md-2 Actions
-
-  - @service_queues.each do |queue|
-
-    %tbody
+.table-responsive
+  %table.table.table-bordered.table-hover
+    %thead
       %tr
-        %td= link_to queue.name, manage_service_queue_path(queue)
-        %td.text-center= queue.tickets.count
-        %td.text-center= queue.tickets.waiting.count
-        %td.text-center= queue.tickets.being_served.count
-        %td.text-center= queue.tickets.served.count
-        %td
-          = link_to manage_service_queue_path(queue), class: "btn btn-primary btn-xs" do
-            %i.fa.fa-gear
+        %th.col-md-2 Name
+        %th.col-md-2 Specialties
+        %th.col-md-1.text-center Total Tickets
+        %th.col-md-1.text-center Waiting
+        %th.col-md-1.text-center Being Served
+        %th.col-md-1.text-center Finished
+        %th.col-md-2 Actions
 
-          = link_to service_queue_path(queue), class: "btn btn-info btn-xs" do
-            %i.fa.fa-eye
+    - @service_queues.each do |queue|
 
-          %button.btn.btn-warning.btn-xs{"data-toggle" => "modal", "data-target" => "#edit-queue-#{queue.id}-modal"}
-            %i.fa.fa-pencil
+      %tbody
+        %tr
+          %td= link_to queue.name, manage_service_queue_path(queue)
+          %td= queue.specialties
+          %td.text-center= queue.tickets.count
+          %td.text-center= queue.tickets.waiting.count
+          %td.text-center= queue.tickets.being_served.count
+          %td.text-center= queue.tickets.served.count
+          %td
+            = link_to manage_service_queue_path(queue), class: "btn btn-primary btn-xs" do
+              %i.fa.fa-gear
 
-          = link_to service_queue_path(queue), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: "Are you sure?" } do
-            %i.fa.fa-trash
+            = link_to service_queue_path(queue), class: "btn btn-info btn-xs" do
+              %i.fa.fa-eye
 
-          = render "edit", queue: queue
+            %button.btn.btn-warning.btn-xs{"data-toggle" => "modal", "data-target" => "#edit-queue-#{queue.id}-modal"}
+              %i.fa.fa-pencil
+
+            = link_to service_queue_path(queue), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: "Are you sure?" } do
+              %i.fa.fa-trash
+
+            = render "edit", queue: queue
 
 = render "new"
 %hr

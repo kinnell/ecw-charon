@@ -6,7 +6,8 @@
           %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
           %h4.modal-title.text-center= "Edit <b>#{ticket.name}</b>".html_safe
         .modal-body
-          = f.text_field :name, class: "form-control"
+          = f.text_field :name, class: "form-control", required: true
+          = f.select :specialty, ticket.service_queue.specialties_array, { include_blank: true }, class: "form-control", disabled: !(ticket.service_queue.specialties)
           = f.text_area :note, class: "form-control"
         .modal-footer
           = f.submit "Save", class: "btn btn-success btn-block"

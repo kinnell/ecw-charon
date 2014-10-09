@@ -41,15 +41,19 @@ body {
 
 table > thead > tr > th {
   background-color: #00334c;
-  border: 1px solid #00334c !important;
+  border: 1px solid #004060 !important;
   color: white;
   font-weight: 300;
 }
 
 table {
-  border-radius: 4px !important;
+  font-size: 12px;
 }
 
 .btn-xs { margin-left: 3px; margin-right: 3px; }
 
 .form-control { margin-bottom: 10px; }
+
+@-moz-document url-prefix() {
+  fieldset { display: table-cell; }
+}

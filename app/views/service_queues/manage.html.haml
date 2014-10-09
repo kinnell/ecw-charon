@@ -4,92 +4,88 @@
     %i.fa.fa-eye
   %button.btn.btn-success.pull-right{"data-toggle" => "modal", "data-target" => "#new-ticket-for-queue-#{@service_queue.id}-modal"}= "Create Ticket"
 
+.table-responsive
+  %table.table.table-bordered.table-hover
+    %thead
+      %tr
+        %th.text-center
+        %th.text-center #
+        %th Name
+        %th.text-center Specialty
+        %th.text-center Status
+        %th.text-center Created At
+        %th.text-center Started Service At
+        %th.text-center Finished Service At
+        %th.text-center Waiting Time
+        %th.text-center Service Time
+        %th Actions
 
-%table.table.table-bordered.table-hover
-  %thead
-    %tr
-      %th.text-center
-      %th.text-center #
-      %th Name
-      %th.text-center Status
-      %th.text-center Created At
-      %th.text-center Started Service At
-      %th.text-center Finished Service At
-      %th.text-center Waiting Time
-      %th.text-center Service Time
-      %th Actions
-
-  %tbody
-    - @service_queue.tickets.not_served.sorted.each do |ticket|
-      %tr{class: ("success" if ticket.first_in_waiting?)}
-        %td.text-center= render "tickets/star", ticket: ticket
-        %td.text-center= ticket.waiting_spot
-        %td= ticket.name
-        %td.text-center= ticket.status
-        %td.text-center= ticket.created_at.strftime("%l:%M %p")
-        %td.text-center= ticket.started_service_at && ticket.started_service_at.strftime("%l:%M %p")
-        %td.text-center= ticket.finished_service_at.strftime("%l:%M %p") if ticket.finished_service_at
-        %td.text-center= ticket.print_in_minutes(ticket.waiting_time) if ticket.waiting_time
-        %td.text-center= ticket.print_in_minutes(ticket.service_time) if ticket.service_time
-        %td
-          = link_to ticket_path(ticket, ticket: {started_service_at: DateTime.now}), method: :patch, class: "btn btn-success btn-xs", disabled: (ticket.waiting?).! do
-            %i.fa.fa-play
-
-          = link_to ticket_path(ticket, ticket: {finished_service_at: DateTime.now}), method: :patch, class: "btn btn-info btn-xs", disabled: (ticket.being_served?).! do
-            %i.fa.fa-check
-
-          %button.btn.btn-warning.btn-xs{"data-toggle" => "modal", "data-target" => "#edit-ticket-#{ticket.id}-modal"}
-            %i.fa.fa-pencil
-
-          = link_to ticket_path(ticket), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: "Are you sure?" } do
-            %i.fa.fa-trash
-
-          = render "tickets/edit", ticket: ticket
-
+    %tbody
+      - @service_queue.tickets.not_served.sorted.each do |ticket|
+        %tr{class: ("success" if ticket.first_in_waiting?)}
+          %td.text-center= render "tickets/star", ticket: ticket
+          %td.text-center= ticket.waiting_spot
+          %td= ticket.name
+          %td.text-center= ticket.specialty
+          %td.text-center= ticket.status
+          %td.text-center= ticket.created_at.strftime("%l:%M %p")
+          %td.text-center= ticket.started_service_at && ticket.started_service_at.strftime("%l:%M %p")
+          %td.text-center= ticket.finished_service_at.strftime("%l:%M %p") if ticket.finished_service_at
+          %td.text-center= ticket.print_in_minutes(ticket.waiting_time) if ticket.waiting_time
+          %td.text-center= ticket.print_in_minutes(ticket.service_time) if ticket.service_time
+          %td
+            = link_to ticket_path(ticket, ticket: {started_service_at: DateTime.now}), method: :patch, class: "btn btn-success btn-xs", disabled: (ticket.waiting?).! do
+              %i.fa.fa-play
+            = link_to ticket_path(ticket, ticket: {finished_service_at: DateTime.now}), method: :patch, class: "btn btn-info btn-xs", disabled: (ticket.being_served?).! do
+              %i.fa.fa-check
+            %button.btn.btn-warning.btn-xs{"data-toggle" => "modal", "data-target" => "#edit-ticket-#{ticket.id}-modal"}
+              %i.fa.fa-pencil
+            = link_to ticket_path(ticket), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: "Are you sure?" } do
+              %i.fa.fa-trash
+            = render "tickets/edit", ticket: ticket
 %hr
 
 %h4 Served Tickets
 
-%table.table.table-bordered.table-hover
-  %thead
-    %tr
-      %th.text-center
-      %th.text-center #
-      %th Name
-      %th.text-center Status
-      %th.text-center Created At
-      %th.text-center Started Service At
-      %th.text-center Finished Service At
-      %th.text-center Waiting Time
-      %th.text-center Service Time
-      %th Actions
-
-  %tbody
-    - @service_queue.tickets.served.sorted.each do |ticket|
+.table-responsive
+  %table.table.table-bordered.table-hover
+    %thead
       %tr
-        %td.text-center
-        %td.text-center
-        %td= ticket.name
-        %td.text-center= ticket.status
-        %td.text-center= ticket.created_at.strftime("%l:%M %p")
-        %td.text-center= ticket.started_service_at && ticket.started_service_at.strftime("%l:%M %p")
-        %td.text-center= ticket.finished_service_at.strftime("%l:%M %p") if ticket.finished_service_at
-        %td.text-center= ticket.print_in_minutes(ticket.waiting_time) if ticket.waiting_time
-        %td.text-center= ticket.print_in_minutes(ticket.service_time) if ticket.service_time
-        %td
-          = link_to ticket_path(ticket, ticket: {started_service_at: DateTime.now}), method: :patch, class: "btn btn-success btn-xs", disabled: (ticket.waiting?).! do
-            %i.fa.fa-play
+        %th.text-center
+        %th.text-center #
+        %th Name
+        %th.text-center Specialty
+        %th.text-center Status
+        %th.text-center Created At
+        %th.text-center Started Service At
+        %th.text-center Finished Service At
+        %th.text-center Waiting Time
+        %th.text-center Service Time
+        %th Actions
 
-          = link_to ticket_path(ticket, ticket: {finished_service_at: DateTime.now}), method: :patch, class: "btn btn-info btn-xs", disabled: (ticket.being_served?).! do
-            %i.fa.fa-check
-
-          %button.btn.btn-warning.btn-xs{"data-toggle" => "modal", "data-target" => "#edit-ticket-#{ticket.id}-modal"}
-            %i.fa.fa-pencil
-
-          = link_to ticket_path(ticket), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: "Are you sure?" } do
-            %i.fa.fa-trash
-
-          = render "tickets/edit", ticket: ticket
+    %tbody
+      - @service_queue.tickets.served.sorted.each do |ticket|
+        %tr
+          %td.text-center
+          %td.text-center
+          %td= ticket.name
+          %td.text-center= ticket.specialty
+          %td.text-center= ticket.status
+          %td.text-center= ticket.created_at.strftime("%l:%M %p")
+          %td.text-center= ticket.started_service_at && ticket.started_service_at.strftime("%l:%M %p")
+          %td.text-center= ticket.finished_service_at.strftime("%l:%M %p") if ticket.finished_service_at
+          %td.text-center= ticket.print_in_minutes(ticket.waiting_time) if ticket.waiting_time
+          %td.text-center= ticket.print_in_minutes(ticket.service_time) if ticket.service_time
+          %td
+            = link_to ticket_path(ticket, ticket: {started_service_at: DateTime.now}), method: :patch, class: "btn btn-success btn-xs", disabled: (ticket.waiting?).! do
+              %i.fa.fa-play
+            = link_to ticket_path(ticket, ticket: {finished_service_at: DateTime.now}), method: :patch, class: "btn btn-info btn-xs", disabled: (ticket.being_served?).! do
+              %i.fa.fa-check
+            %button.btn.btn-warning.btn-xs{"data-toggle" => "modal", "data-target" => "#edit-ticket-#{ticket.id}-modal"}
+              %i.fa.fa-pencil
+            = link_to ticket_path(ticket), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: "Are you sure?" } do
+              %i.fa.fa-trash
+            = render "tickets/edit", ticket: ticket
 
 = render "tickets/new", queue: @service_queue
 %hr

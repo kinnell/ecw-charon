@@ -11,12 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141009062807) do
+ActiveRecord::Schema.define(version: 20141009070949) do
 
   create_table "service_queues", force: true do |t|
-    t.string   "name",       null: false
+    t.string   "name",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "specialties"
   end
 
   create_table "tickets", force: true do |t|
@@ -28,6 +29,7 @@ ActiveRecord::Schema.define(version: 20141009062807) do
     t.integer  "service_queue_id"
     t.boolean  "starred",             default: false
     t.text     "note"
+    t.string   "specialty"
   end
 
 end

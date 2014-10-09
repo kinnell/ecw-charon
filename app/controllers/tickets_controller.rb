@@ -1,12 +1,12 @@
 class TicketsController < ApplicationController
   def create
-    @ticket = Ticket.create(params[:ticket].permit(:service_queue_id, :name, :note))
+    @ticket = Ticket.create(params[:ticket].permit(:service_queue_id, :name, :note, :specialty))
     redirect_to :back
   end
 
   def update
     @ticket = Ticket.find(params[:id])
-    @ticket.update(params[:ticket].permit(:started_service_at, :finished_service_at, :name, :starred, :note))
+    @ticket.update(params[:ticket].permit(:started_service_at, :finished_service_at, :name, :starred, :note, :specialty))
     redirect_to :back
   end
 

@@ -3,4 +3,8 @@ class ServiceQueue < ActiveRecord::Base
 
   has_many :tickets, dependent: :destroy
 
+  def specialties_array
+    specialties ? specialties.split(", ") : ""
+  end
+
 end

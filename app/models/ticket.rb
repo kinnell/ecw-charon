@@ -28,11 +28,15 @@ class Ticket < ActiveRecord::Base
   def served?() status == "Served" end
 
   def waiting_time
-    (started_service_at - created_at) if started_service_at
+    if started_service_at then (started_service_at - created_at) else (Time.now - created_at) end
   end
 
   def service_time
-    (finished_service_at - started_service_at) if started_service_at && finished_service_at
+    if started_service_at && finished_service_at
+      finished_service_at - started_service_at
+    elsif started_service_at
+      Time.now - started_service_at
+    end
   end
 
   def print_in_minutes(time_in_seconds)

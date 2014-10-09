@@ -79,9 +79,12 @@
               %i.fa.fa-check
             %button.btn.btn-warning.btn-xs{"data-toggle" => "modal", "data-target" => "#edit-ticket-#{ticket.id}-modal"}
               %i.fa.fa-pencil
-            = link_to ticket_path(ticket), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: "Are you sure?" } do
+            %button.btn.btn-danger.btn-xs{"data-toggle" => "modal", "data-target" => "#remove-ticket-#{ticket.id}-modal"}
               %i.fa.fa-trash
+            -# = link_to ticket_path(ticket), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: "Are you sure?" } do
+            -#   %i.fa.fa-trash
             = render "tickets/edit", ticket: ticket
+            = render "tickets/remove", ticket: ticket
 %hr
 
 %h4.text-center

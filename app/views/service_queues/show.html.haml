@@ -6,6 +6,7 @@
       %tr
         %th.col-md-1.text-center= "#"
         %th= "Name"
+        %th.text-center= "Specialty"
         %th.col-md-2.text-center= "Estimated Wait Time"
 
     %tbody
@@ -13,6 +14,8 @@
         %tr{class: ("warning" if ticket.first_in_waiting?)}
           %td.text-center= ticket.waiting_spot
           %td= ticket.name
+          %td.text-center
+            %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
           %td.text-center= time_ago_in_words(Time.now - ticket.estimated_waiting_time)
 
 :javascript

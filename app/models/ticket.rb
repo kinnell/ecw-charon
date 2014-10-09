@@ -59,7 +59,7 @@ class Ticket < ActiveRecord::Base
   end
 
   def estimated_waiting_time
-    service_queue.average_waiting_time * waiting_spot if waiting?
+    service_queue.average_waiting_time_compounded(10) * waiting_spot if waiting?
   end
 
 end

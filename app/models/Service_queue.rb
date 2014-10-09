@@ -24,5 +24,4 @@ class ServiceQueue < ActiveRecord::Base
     tickets.served.any? ? tickets.served.inject(0) { |sum, t| sum + t.service_time } / tickets.served.count : 0
   end
 
-
 end

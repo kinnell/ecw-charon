@@ -1,0 +1,15 @@
+
+.modal.fade{id: "remove-ticket-#{ticket.id}-modal", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-sm
+    .modal-content
+      = form_for ticket do |f|
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+          %h4.modal-title.text-center= "Remove <b>#{ticket.name}</b>".html_safe
+        .modal-body
+          %h6 Removal Reason: 
+          = f.select :removal_reason, ["Client Missing / Not Present", "Client Withdrew Ticket", "Ticket Not Real / Created Accidentally"], { required: true }, { class: "form-control" }
+          = f.hidden_field :active, value: false
+        .modal-footer
+          = f.submit "Remove", class: "btn btn-success btn-block"
+

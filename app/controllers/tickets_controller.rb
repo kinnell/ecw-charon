@@ -6,15 +6,9 @@ class TicketsController < ApplicationController
 
   def update
     @ticket = Ticket.find(params[:id])
-    @ticket.update(params[:ticket].permit(:started_service_at, :finished_service_at, :name, :starred, :note, :specialty))
+    @ticket.update(params[:ticket].permit(:started_service_at, :finished_service_at, :name, :starred, :note, :specialty, :active, :removal_reason))
     redirect_to :back
   end
 
-  def destroy
-    @ticket = Ticket.find(params[:id])
-    @ticket.update(active: false)
-    # @ticket.destroy
-    redirect_to :back
-  end
 end
 

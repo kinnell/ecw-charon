@@ -1,12 +1,11 @@
 %h1.text-center= @service_queue.name
 
 .table-responsive
-  %table.table.table-bordered
+  %table.table.table-bordered.table-responsive{style: "font-size: 16px"}
     %thead
       %tr
         %th.col-md-1.text-center= "#"
         %th= "Name"
-        %th.col-md-1.text-center= "Status"
         %th.col-md-2.text-center= "Estimated Wait Time"
 
     %tbody
@@ -14,7 +13,6 @@
         %tr{class: ("warning" if ticket.first_in_waiting?)}
           %td.text-center= ticket.waiting_spot
           %td= ticket.name
-          %td.text-center= ticket.status
           %td.text-center= time_ago_in_words(Time.now - ticket.estimated_waiting_time)
 
 :javascript

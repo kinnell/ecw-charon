@@ -3,9 +3,11 @@ class Ticket < ActiveRecord::Base
 
   belongs_to :service_queue	
 
-  scope :waiting, -> { where(started_service_at: nil).order("starred DESC, created_at") }
-  scope :being_served, -> { where.not(started_service_at: nil).where(finished_service_at: nil).order(:started_service_at) }
-  scope :served, -> { where.not(finished_service_at: nil).order(:finished_service_at).order(:finished_service_at) }
+  scope :active, -> { where(active: true) }
+
+  scope :waiting, -> { active.where(started_service_at: nil).order("starred DESC, created_at") }
+  scope :being_served, -> { active.where.not(started_service_at: nil).where(finished_service_at: nil).order(:started_service_at) }
+  scope :served, -> { active.where.not(finished_service_at: nil).order(:finished_service_at).order(:finished_service_at) }
 
   scope :not_waiting, -> { being_served + served }
 

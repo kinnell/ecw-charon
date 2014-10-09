@@ -12,7 +12,8 @@ class TicketsController < ApplicationController
 
   def destroy
     @ticket = Ticket.find(params[:id])
-    @ticket.destroy
+    @ticket.update(active: false)
+    # @ticket.destroy
     redirect_to :back
   end
 end

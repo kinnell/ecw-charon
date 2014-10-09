@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141009110529) do
+ActiveRecord::Schema.define(version: 20141009144758) do
 
   create_table "service_queues", force: true do |t|
     t.string   "name",                             null: false
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20141009110529) do
     t.boolean  "starred",             default: false
     t.text     "note"
     t.string   "specialty"
+    t.boolean  "active",              default: true
   end
 
 end

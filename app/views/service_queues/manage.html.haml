@@ -9,11 +9,39 @@
   %button.btn.btn-success.pull-right{"data-toggle" => "modal", "data-target" => "#new-ticket-for-queue-#{@service_queue.id}-modal"}= "Create Ticket"
 
 = render "edit", queue: @service_queue
+
+-#
+-# .table-responsive
+-#   %table.table.table-bordered.table-hover
+-#     %thead
+-#       %tr
+-#         %th Specialties
+-#         %th.text-center Total Tickets
+-#         %th.text-center Waiting
+-#         %th.text-center Avg Wait Time
+-#         %th.text-center Being Served
+-#         %th.text-center Avg Service Time
+-#         %th.text-center Finished
+-#
+-#     %tbody
+-#       %tr
+-#         %td
+-#           - @service_queue.specialties_array.each do |specialty|
+-#             %span.label.label-primary= specialty.upcase
+-#         %td.text-center= @service_queue.tickets.count
+-#         %td.text-center= @service_queue.tickets.waiting.count
+-#         %td.text-center= time_ago_in_words(Time.now - @service_queue.average_waiting_time) if @service_queue.tickets.waiting.any?
+-#         %td.text-center= @service_queue.tickets.being_served.count
+-#         %td.text-center= time_ago_in_words(Time.now - @service_queue.average_service_time) if @service_queue.tickets.served.any?
+-#         %td.text-center= @service_queue.tickets.served.count
+-#
+
 %hr
 
 %h4.text-center
   %i.fa.fa-refresh
   Being Served
+  %span.label.label-success.pull-right= @service_queue.tickets.being_served.count
 
 .table-responsive
   %table.table.table-bordered.table-hover
@@ -59,7 +87,7 @@
 %h4.text-center
   %i.fa.fa-clock-o 
   Waiting
-
+  %span.label.label-warning.pull-right= @service_queue.tickets.waiting.count
 
 .table-responsive
   %table.table.table-bordered.table-hover
@@ -103,6 +131,7 @@
 %h4.text-center
   %i.fa.fa-check-circle
   Served
+  %span.label.label-default.pull-right= @service_queue.tickets.served.count
 
 .table-responsive
   %table.table.table-bordered.table-hover

@@ -8,7 +8,7 @@
         %th= "Name"
         %th.col-md-1.text-center= "Status"
 
-    - @service_queue.tickets.waiting.sort_by_starred.each do |ticket|
+    - @service_queue.tickets.waiting.each do |ticket|
       %tbody
         %tr{class: ("warning" if ticket.first_in_waiting?)}
           %td.text-center= ticket.waiting_spot

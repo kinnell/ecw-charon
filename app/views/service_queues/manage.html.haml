@@ -24,7 +24,7 @@
         %th Actions
 
     %tbody
-      - @service_queue.tickets.not_served.sorted.each do |ticket|
+      - @service_queue.tickets.not_served_sorted.each do |ticket|
         %tr{class: ticket.color}
           %td
             = render "tickets/star", ticket: ticket
@@ -67,7 +67,7 @@
         %th Actions
 
     %tbody
-      - @service_queue.tickets.served.sorted.each do |ticket|
+      - @service_queue.tickets.served.each do |ticket|
         %tr.active
           %td 
             = render "tickets/star", ticket: ticket

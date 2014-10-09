@@ -27,7 +27,7 @@
               %span.label.label-primary= specialty.upcase
           %td.text-center= queue.tickets.count
           %td.text-center= queue.tickets.waiting.count
-          %td.text-center= time_ago_in_words(Time.now - queue.average_waiting_time) if queue.tickets.waiting.any?
+          %td.text-center= time_ago_in_words(Time.now - queue.average_waiting_time_compounded(10)) if queue.tickets.not_waiting.any?
           %td.text-center= queue.tickets.being_served.count
           %td.text-center= time_ago_in_words(Time.now - queue.average_service_time) if queue.tickets.served.any?
           %td.text-center= queue.tickets.served.count

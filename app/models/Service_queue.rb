@@ -7,9 +7,16 @@ class ServiceQueue < ActiveRecord::Base
     specialties ? specialties.split(", ") : [""]
   end
 
+
+  def total_waiting_time
+    tickets.not_waiting.inject(0) { |sum, t| sum + t.waiting_time }
+  end
+
   def average_waiting_time
-    compound_factor = 10
-    total_waiting_time = tickets.not_waiting.inject(0) { |sum, t| sum + t.waiting_time }
+    tickets.not_waiting.any? ? total_waiting_time / tickets.not_waiting.count : 0
+  end
+
+  def average_waiting_time_compounded(compound_factor)
     (total_waiting_time + (initial_waiting_time * 60 * compound_factor)) / (tickets.not_waiting.count + compound_factor)
   end
 

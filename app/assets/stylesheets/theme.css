@@ -130,9 +130,18 @@ hr:after {
   background: #fff;
 }
 
-h4 .fa {
-  color: #666;
+li a .fa {
   margin-right: 5px;
+}
+
+li a .badge {
+  margin-left: 10px;
+  font-size: 10px;
+  line-height: 1;
+  color: white;
+  background-color: #428bca; 
+  font-weight: 600;
+  vertical-align: middle;
 }
 
 h4 { margin-bottom: 15px; }

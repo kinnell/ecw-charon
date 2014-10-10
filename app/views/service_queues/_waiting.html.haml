@@ -1,0 +1,28 @@
+.table-responsive
+  %table.table.table-bordered.table-hover
+    %thead
+      %tr
+        %th{style: "width: 5%"}
+        %th{style: "width: 25%"} Name
+        %th.text-center{style: "width: 7.5%"} Specialty
+        %th.text-center Created At
+        %th.text-center Current Waiting Time
+        %th.text-center Est. Wait Time
+        %th{style: "width: 15%"} Actions
+
+    %tbody
+      - queue.tickets.waiting.each do |ticket|
+        %tr{class: ticket.color}
+          %td
+            = render "tickets/star", ticket: ticket
+            = ticket.waiting_spot
+          %td
+            = ticket.name.truncate(40)
+            - unless ticket.note.blank?
+              %i.fa.fa-file-text-o.pull-right{style: "opacity: 0.5"}
+          %td.text-center
+            %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
+          %td.text-center= ticket.created_at.strftime("%l:%M %p")
+          %td.text-center= time_ago_in_words(Time.now - ticket.waiting_time)
+          %td.text-center= time_ago_in_words(Time.now - ticket.estimated_waiting_time)
+          %td= render "tickets/actions", ticket: ticket

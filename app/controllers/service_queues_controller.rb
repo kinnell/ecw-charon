@@ -2,11 +2,11 @@ class ServiceQueuesController < ApplicationController
   def index
     @service_queues = ServiceQueue.all
   end
-  
+
   def show
     @service_queue = ServiceQueue.find(params[:id])
   end
-  
+
   def manage
     @service_queue = ServiceQueue.find(params[:id])
   end

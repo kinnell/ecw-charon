@@ -15,7 +15,7 @@
     %tbody
       - queue.tickets.served.each do |ticket|
         %tr.active
-          %td 
+          %td
             = render "tickets/star", ticket: ticket
           %td
             = ticket.name.truncate(40)
@@ -24,7 +24,7 @@
           %td.text-center
             %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
           %td.text-center= ticket.created_at.strftime("%l:%M %p")
-          %td.text-center= time_ago_in_words(Time.now - ticket.waiting_time.seconds) 
+          %td.text-center= time_ago_in_words(Time.now - ticket.waiting_time.seconds)
           %td.text-center= ticket.started_service_at && ticket.started_service_at.strftime("%l:%M %p")
           %td.text-center= time_ago_in_words(Time.now - ticket.service_time.seconds)
           %td.text-center= ticket.finished_service_at.strftime("%l:%M %p")

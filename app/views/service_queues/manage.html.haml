@@ -2,7 +2,7 @@
   = @service_queue.name
   = link_to service_queue_path(@service_queue), class: "btn btn-info pull-right", style: "margin-left: 5px;" do
     %i.fa.fa-eye
-      
+
   %button.btn.btn-warning.pull-right{"data-toggle" => "modal", "data-target" => "#edit-queue-#{@service_queue.id}-modal", style: "margin-left: 5px"}
     %i.fa.fa-gear
 
@@ -26,7 +26,7 @@
       %span.badge= @service_queue.tickets.being_served.count
   %li
     %a{"data-toggle" => "tab", :role => "tab", :href => "#waiting"}
-      %i.fa.fa-clock-o 
+      %i.fa.fa-clock-o
       Waiting
       %span.badge= @service_queue.tickets.waiting.count
   %li

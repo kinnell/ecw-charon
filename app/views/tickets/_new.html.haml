@@ -6,7 +6,7 @@
           %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
           %h4.modal-title.text-center= "Create a ticket for <b>#{queue.name}</b>".html_safe
         .modal-body
-          %h6 Name: 
+          %h6 Name:
           = f.text_field :name, class: "form-control", required: true
           %h6 Specialty:
           = f.select :specialty, queue.specialties_array, { include_blank: "No specialty" }, class: "form-control", disabled: !(queue.specialties)

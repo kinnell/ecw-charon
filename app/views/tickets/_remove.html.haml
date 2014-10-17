@@ -7,7 +7,7 @@
           %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
           %h4.modal-title.text-center= "Remove <b>#{ticket.name}</b>".html_safe
         .modal-body
-          %h6 Removal Reason: 
+          %h6 Removal Reason:
           = f.select :removal_reason, ["Client Missing / Not Present", "Client Withdrew Ticket", "Ticket Not Real / Created Accidentally"], { required: true }, { class: "form-control" }
           = f.hidden_field :active, value: false
         .modal-footer

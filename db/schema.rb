@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141009194036) do
+ActiveRecord::Schema.define(version: 20141017151054) do
 
   create_table "service_queues", force: true do |t|
     t.string   "name",                             null: false
@@ -35,5 +35,7 @@ ActiveRecord::Schema.define(version: 20141009194036) do
     t.boolean  "active",              default: true
     t.string   "removal_reason"
   end
+
+  add_index "tickets", ["service_queue_id"], name: "index_tickets_on_service_queue_id"
 
 end

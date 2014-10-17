@@ -24,3 +24,4 @@ group :doc do
 end
 
 gem "puma"
+gem "newrelic_rpm"

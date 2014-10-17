@@ -25,7 +25,7 @@
           %td
             - queue.specialties_array.each do |specialty|
               %span.label.label-primary= specialty.upcase
-          %td.text-center= queue.tickets.count
+          %td.text-center= queue.tickets.active.count
           %td.text-center= queue.tickets.waiting.count
           %td.text-center= time_ago_in_words(Time.now - queue.average_waiting_time) if queue.tickets.not_waiting.any?
           %td.text-center= queue.tickets.being_served.count

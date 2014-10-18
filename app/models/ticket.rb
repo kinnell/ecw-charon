@@ -61,7 +61,7 @@ class Ticket < ActiveRecord::Base
   def estimated_waiting_time
     if waiting?
       max_waiting_time = 30
-      wait_according_to_time_waited = waiting_time > 60*60 ? 1 : (60*60 - waiting_time)
+      wait_according_to_time_waited = waiting_time > max_waiting_time*60 ? 1 : (max_waiting_time*60 - waiting_time)
       wait_according_to_waiting_spot = service_queue.average_waiting_time_compounded(10) * waiting_spot
       [wait_according_to_time_waited, wait_according_to_waiting_spot].min
     end

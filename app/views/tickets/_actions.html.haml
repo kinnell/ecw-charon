@@ -4,13 +4,9 @@
 = link_to ticket_path(ticket, ticket: {finished_service_at: DateTime.now}), method: :patch, class: "btn btn-info btn-xs", disabled: (ticket.being_served?).! do
   %i.fa.fa-check
 
-%button.btn.btn-warning.btn-xs{"data-toggle" => "modal", "data-target" => "#edit-ticket-#{ticket.id}-modal"}
+= link_to edit_ticket_path(ticket), remote: true, class: "btn btn-warning btn-xs" do
   %i.fa.fa-pencil
 
-%button.btn.btn-danger.btn-xs{"data-toggle" => "modal", "data-target" => "#remove-ticket-#{ticket.id}-modal"}
+= link_to deactivate_ticket_path(ticket), remote: true, class: "btn btn-danger btn-xs" do
   %i.fa.fa-trash
 
-
-
-= render "tickets/edit", ticket: ticket
-= render "tickets/remove", ticket: ticket

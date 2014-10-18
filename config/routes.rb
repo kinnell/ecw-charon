@@ -4,7 +4,9 @@ Charon::Application.routes.draw do
     get :manage, on: :member
   end
 
-	resources :tickets, only: [:create, :update]
+	resources :tickets, only: [:create, :edit, :update] do
+    get :deactivate, on: :member
+  end
 
 	root to: "service_queues#index"
 end

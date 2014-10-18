@@ -1,0 +1,6 @@
+
+if ($("#deactivate-ticket-<%= @ticket.id %>-modal").length == 0) {
+  $("body").append("<%= j render 'tickets/deactivate', ticket: @ticket %>")
+}
+
+$("#deactivate-ticket-<%= @ticket.id %>-modal").modal("show")

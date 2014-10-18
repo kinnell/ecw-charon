@@ -1,0 +1,5 @@
+if ($("#edit-ticket-<%= @ticket.id %>-modal").length == 0) {
+  $("body").append("<%= j render 'tickets/edit', ticket: @ticket %>")
+}
+
+$("#edit-ticket-<%= @ticket.id %>-modal").modal("show")

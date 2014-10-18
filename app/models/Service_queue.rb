@@ -20,7 +20,7 @@ class ServiceQueue < ActiveRecord::Base
   end
 
   def average_waiting_time_compounded(compound_factor)
-    (total_waiting_time_with_max(30) + (initial_waiting_time * 60 * compound_factor)) / (tickets.not_waiting.count + compound_factor)
+    (total_waiting_time_with_max(60) + (initial_waiting_time * 60 * compound_factor)) / (tickets.not_waiting.count + compound_factor)
   end
 
   def average_service_time

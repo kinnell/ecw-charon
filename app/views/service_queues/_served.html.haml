@@ -13,7 +13,7 @@
         %th{style: "width: 15%"} Actions
 
     %tbody
-      - queue.tickets.served.each do |ticket|
+      - tickets.served.each do |ticket|
         %tr.active
           %td
             = render "tickets/star", ticket: ticket

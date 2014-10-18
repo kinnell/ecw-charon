@@ -15,22 +15,18 @@
 %hr
 
 %ul.nav.nav-tabs.nav-justified{:role => "tablist"}
-  -# %li.active
-  -#   %a{"data-toggle" => "tab", :role => "tab", :href => "#all"}
-  -#     All
-  -#     %span.badge= @service_queue.tickets.active.count
-  %li.active
-    %a{"data-toggle" => "tab", :role => "tab", :href => "#being-served"}
+  %li{ class: ("active" if @filter_status == "being_served") }
+    = link_to manage_service_queue_path(@service_queue, filter_status: "being_served") do
       %i.fa.fa-refresh
       Being Served
       %span.badge= @service_queue.tickets.being_served.count
-  %li
-    %a{"data-toggle" => "tab", :role => "tab", :href => "#waiting"}
+  %li{ class: ("active" if @filter_status == "waiting") }
+    = link_to manage_service_queue_path(@service_queue, filter_status: "waiting") do
       %i.fa.fa-clock-o
       Waiting
       %span.badge= @service_queue.tickets.waiting.count
-  %li
-    %a{"data-toggle" => "tab", :role => "tab", :href => "#served"}
+  %li{ class: ("active" if @filter_status == "served") }
+    = link_to manage_service_queue_path(@service_queue, filter_status: "served") do
       %i.fa.fa-check-circle
       Served
       %span.badge= @service_queue.tickets.served.count
@@ -39,18 +35,13 @@
 %br
 
 .tab-content
-  -# #all.tab-pane.fade.in.active
-    -# = render "being_served", queue: @service_queue
-    -# %hr
-    -# = render "waiting", queue: @service_queue
-    -# %hr
-    -# = render "served", queue: @service_queue
-  #being-served.tab-pane.fade.in.active
-    = render "being_served", queue: @service_queue
-  #waiting.tab-pane.fade
-    = render "waiting", queue: @service_queue
-  #served.tab-pane.fade
-    = render "served", queue: @service_queue
+  #tab-pane.tab-pane.fade.in.active
+    - if @filter_status == "waiting"
+      = render "waiting", tickets: @tickets.waiting 
+    - elsif @filter_status == "served"
+      = render "served", tickets: @tickets.served
+    - else
+      = render "being_served", tickets: @tickets.being_served
 
 = render "tickets/new", queue: @service_queue
 %hr

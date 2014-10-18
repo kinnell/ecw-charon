@@ -9,7 +9,10 @@ class ServiceQueuesController < ApplicationController
 
   def manage
     @service_queue = ServiceQueue.find(params[:id])
+    @filter_status = params[:filter_status]
+    @tickets = @service_queue.tickets
   end
+
 
   def create
     @service_queue = ServiceQueue.create(params[:service_queue].permit(:name, :specialties, :refresh_interval, :initial_waiting_time))

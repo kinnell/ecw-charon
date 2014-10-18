@@ -1,4 +1,3 @@
-
 = link_to ticket_path(ticket, ticket: {started_service_at: DateTime.now}), method: :patch, class: "btn btn-success btn-xs", disabled: (ticket.waiting?).! do
   %i.fa.fa-play
 
@@ -10,6 +9,8 @@
 
 %button.btn.btn-danger.btn-xs{"data-toggle" => "modal", "data-target" => "#remove-ticket-#{ticket.id}-modal"}
   %i.fa.fa-trash
+
+
 
 = render "tickets/edit", ticket: ticket
 = render "tickets/remove", ticket: ticket

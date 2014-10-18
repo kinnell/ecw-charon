@@ -11,7 +11,7 @@
         %th{style: "width: 15%"} Actions
 
     %tbody
-      - queue.tickets.waiting.each do |ticket|
+      - tickets.waiting.each do |ticket|
         %tr{class: ticket.color}
           %td
             = render "tickets/star", ticket: ticket

@@ -24,8 +24,8 @@
           %td.text-center
             %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
           %td.text-center= ticket.created_at.strftime("%l:%M %p")
-          %td.text-center= time_ago_in_words(Time.now - ticket.waiting_time.seconds)
+          %td.text-center= timeago_tag (Time.now - ticket.waiting_time.seconds)
           %td.text-center= ticket.started_service_at && ticket.started_service_at.strftime("%l:%M %p")
-          %td.text-center= time_ago_in_words(Time.now - ticket.service_time.seconds)
+          %td.text-center= timeago_tag (Time.now - ticket.service_time.seconds)
           %td.text-center= ticket.finished_service_at.strftime("%l:%M %p")
           %td= render "tickets/actions", ticket: ticket

@@ -6,7 +6,7 @@
         %th{style: "width: 25%"} Name
         %th.text-center{style: "width: 7.5%"} Specialty
         %th.text-center Created At
-        %th.text-center Current Waiting Time
+        %th.text-center Currently Waiting For
         %th.text-center Est. Wait Time
         %th{style: "width: 15%"} Actions
 
@@ -23,6 +23,6 @@
           %td.text-center
             %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
           %td.text-center= ticket.created_at.strftime("%l:%M %p")
-          %td.text-center= time_ago_in_words(Time.now - ticket.waiting_time)
-          %td.text-center= time_ago_in_words(Time.now - ticket.estimated_waiting_time)
+          %td.text-center= timeago_tag (ticket.created_at), limit: 20.days.ago
+          %td.text-center= timeago_tag (Time.now - ticket.estimated_waiting_time)
           %td= render "tickets/actions", ticket: ticket

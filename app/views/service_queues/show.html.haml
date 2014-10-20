@@ -16,7 +16,7 @@
           %td= ticket.name
           %td.text-center
             %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
-          %td.text-center= time_ago_in_words(Time.now - ticket.estimated_waiting_time)
+          %td.text-center= timeago_tag (Time.now - ticket.estimated_waiting_time)
 
 :javascript
   $(document).ready(function() {

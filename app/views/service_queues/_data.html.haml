@@ -1,0 +1,33 @@
+.table-responsive
+  %table.table.table-bordered.table-hover
+    %thead
+      %tr
+        %th{style: "width: 5%"}
+        %th{style: "width: 25%"} Name
+        %th.text-center{style: "width: 7.5%"} Specialty
+        %th.text-center Created At
+        %th.text-center Waiting Time
+        %th.text-center Started Service At
+        %th.text-center Service Time
+        %th.text-center Finished At
+        %th.text-center Note
+        -# %th{style: "width: 15%"} Actions
+
+    %tbody
+      - tickets.served.each do |ticket|
+        %tr.active
+          %td
+            = render "tickets/star", ticket: ticket
+          %td
+            = ticket.name.truncate(40)
+            - unless ticket.note.blank?
+              %i.fa.fa-file-text-o.pull-right{style: "opacity: 0.5"}
+          %td.text-center
+            %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
+          %td.text-center= ticket.created_at.strftime("%c")
+          %td.text-center= time_ago_in_words(Time.now - ticket.waiting_time.seconds)
+          %td.text-center= ticket.started_service_at && ticket.started_service_at.strftime("%c")
+          %td.text-center= time_ago_in_words(Time.now - ticket.service_time.seconds)
+          %td.text-center= ticket.finished_service_at.strftime("%c")
+          %td= ticket.note
+          -# %td= render "tickets/actions", ticket: ticket

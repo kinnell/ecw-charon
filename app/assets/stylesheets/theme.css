@@ -1,7 +1,8 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Open Sans";
+  font-family: "Roboto";
+  background-color: #F5F8FA;
 }
 
 a, a:hover { text-decoration: none !important; }
@@ -9,13 +10,14 @@ a, a:hover { text-decoration: none !important; }
 .logo {
   font-family: "Arial";
   font-style: italic;
+  font-weight: 500;
   font-size: 24px;
-  letter-spacing: -0.05em;
   color: #FFFFFF !important;
 }
 
 .navbar-default {
-  background-color: #00334c;
+  background-color: #2579a9;
+  border: 1px solid #1e73a5;
   border-radius: 0px;
 }
 
@@ -58,21 +60,42 @@ a, a:hover { text-decoration: none !important; }
   margin-right: 5px;
 }
 
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 0 !important;
+}
+
 table > thead > tr > th {
-  background-color: #00334c;
-  border: 1px solid #004060 !important;
-  color: white;
-  font-weight: 300;
-  vertical-align: middle !important;
+  border: 0 !important;
+  border-bottom: 2px solid #AAA !important;
+  vertical-align: bottom;
+  
 }
 
 table > tbody > tr > td {
-  vertical-align: middle !important;
+  border: 0 !important;
+  border-bottom: 1px solid #CCC !important;
+  line-height: 1.5;
+  vertical-align: top;
+  font-weight: 100;
 }
 
-table {
-  font-size: 12px;
-}
+/* table > thead > tr > th { */
+/*   background-color: #00334c; */
+/*   border: 1px solid #004060 !important; */
+/*   color: white; */
+/*   font-weight: 300; */
+/*   vertical-align: middle !important; */
+/* } */
+/*  */
+/* table > tbody > tr > td { */
+/*   vertical-align: middle !important; */
+/* } */
+/*  */
+/* table { */
+/*   font-size: 12px; */
+/* } */
 
 .btn-xs { margin-left: 3px; margin-right: 3px; }
 
@@ -144,7 +167,27 @@ li a .badge {
   vertical-align: middle;
 }
 
+h2 { 
+  font-weight: 300;
+  line-height: 1.1;
+  color: #555555;
+  margin: 5px;
+}
+
+
 h4 { margin-bottom: 15px; }
 
 h6 { font-weight: 600; margin-top: 15px; }
+
+.panel {
+  border: 1px solid #d3e0e9;
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading {
+  border-bottom: 1px solid #EEE;
+  background-color: #FAFAFA;
+}
 

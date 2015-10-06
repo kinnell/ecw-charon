@@ -1,54 +1,55 @@
-%h2
-  = @service_queue.name
-  = link_to service_queue_path(@service_queue), class: "btn btn-info pull-right", style: "margin-left: 5px;" do
-    %i.fa.fa-eye
+.panel
+  .panel-heading
+    %h2
+      = @service_queue.name
+      = link_to service_queue_path(@service_queue), class: "btn btn-info pull-right", style: "margin-left: 5px;" do
+        %i.fa.fa-eye
 
-  %button.btn.btn-warning.pull-right{"data-toggle" => "modal", "data-target" => "#edit-queue-#{@service_queue.id}-modal", style: "margin-left: 5px"}
-    %i.fa.fa-gear
+      %button.btn.btn-warning.pull-right{"data-toggle" => "modal", "data-target" => "#edit-queue-#{@service_queue.id}-modal", style: "margin-left: 5px"}
+        %i.fa.fa-gear
 
-  %button.btn.btn-success.pull-right{"data-toggle" => "modal", "data-target" => "#new-ticket-for-queue-#{@service_queue.id}-modal"}
-    %i.fa.fa-user{style: "margin-right: 5px;"}
-    Create Ticket
+      %button.btn.btn-success.pull-right{"data-toggle" => "modal", "data-target" => "#new-ticket-for-queue-#{@service_queue.id}-modal"}
+        %i.fa.fa-user{style: "margin-right: 5px;"}
+        Create Ticket
 
-= render "edit", queue: @service_queue
+    = render "edit", queue: @service_queue
 
-%hr
+  .panel-body
 
-%ul.nav.nav-tabs.nav-justified{:role => "tablist"}
-  %li{ class: ("active" if @filter_status == "being_served") }
-    = link_to manage_service_queue_path(@service_queue, filter_status: "being_served") do
-      %i.fa.fa-refresh
-      Being Served
-      %span.badge= @service_queue.tickets.being_served.count
-  %li{ class: ("active" if @filter_status == "waiting") }
-    = link_to manage_service_queue_path(@service_queue, filter_status: "waiting") do
-      %i.fa.fa-clock-o
-      Waiting
-      %span.badge= @service_queue.tickets.waiting.count
-  %li{ class: ("active" if @filter_status == "served") }
-    = link_to manage_service_queue_path(@service_queue, filter_status: "served") do
-      %i.fa.fa-check-circle
-      Served
-      %span.badge= @service_queue.tickets.served.count
-  %li{ class: ("active" if @filter_status == "data") }
-    = link_to manage_service_queue_path(@service_queue, filter_status: "data") do
-      %i.fa.fa-bar-chart
-      Data
-      %span.badge= @service_queue.tickets.served.count
+    %ul.nav.nav-tabs.nav-justified{:role => "tablist"}
+      %li{ class: ("active" if @filter_status == "being_served") }
+        = link_to manage_service_queue_path(@service_queue, filter_status: "being_served") do
+          %i.fa.fa-refresh
+          Being Served
+          %span.badge= @service_queue.tickets.being_served.count
+      %li{ class: ("active" if @filter_status == "waiting") }
+        = link_to manage_service_queue_path(@service_queue, filter_status: "waiting") do
+          %i.fa.fa-clock-o
+          Waiting
+          %span.badge= @service_queue.tickets.waiting.count
+      %li{ class: ("active" if @filter_status == "served") }
+        = link_to manage_service_queue_path(@service_queue, filter_status: "served") do
+          %i.fa.fa-check-circle
+          Served
+          %span.badge= @service_queue.tickets.served.count
+      %li{ class: ("active" if @filter_status == "data") }
+        = link_to manage_service_queue_path(@service_queue, filter_status: "data") do
+          %i.fa.fa-bar-chart
+          Data
+          %span.badge= @service_queue.tickets.served.count
 
-%br
-%br
+    %br
+    %br
 
-.tab-content
-  #tab-pane.tab-pane.fade.in.active
-    - if @filter_status == "waiting"
-      = render "waiting", tickets: @tickets.waiting 
-    - elsif @filter_status == "served"
-      = render "served", tickets: @tickets.served
-    - elsif @filter_status == "data"
-      = render "data", tickets: @tickets.served
-    - else
-      = render "being_served", tickets: @tickets.being_served
+    .tab-content
+      #tab-pane.tab-pane.fade.in.active
+        - if @filter_status == "waiting"
+          = render "waiting", tickets: @tickets.waiting 
+        - elsif @filter_status == "served"
+          = render "served", tickets: @tickets.served
+        - elsif @filter_status == "data"
+          = render "data", tickets: @tickets.served
+        - else
+          = render "being_served", tickets: @tickets.being_served
 
-= render "tickets/new", queue: @service_queue
-%hr
+    = render "tickets/new", queue: @service_queue

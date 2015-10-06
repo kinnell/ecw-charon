@@ -7,6 +7,10 @@ class ServiceQueuesController < ApplicationController
     @service_queue = ServiceQueue.find(params[:id])
   end
 
+  def show_all
+    @service_queues = ServiceQueue.all
+  end
+
   def manage
     @service_queue = ServiceQueue.find(params[:id])
     @filter_status = params[:filter_status] || "being_served"

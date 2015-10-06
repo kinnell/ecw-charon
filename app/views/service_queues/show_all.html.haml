@@ -1,0 +1,45 @@
+%h1.text-center
+
+.col-md-6
+  .table-responsive
+    %table.table.table-bordered.table-responsive{style: "font-size: 16px"}
+      %thead
+        %tr
+          %th.col-md-1.text-center= "#"
+          %th= "Name"
+          %th.text-center= "Specialty"
+          %th.col-md-2.text-center= "Estimated Wait Time"
+
+      %tbody
+        - @service_queues.first.tickets.waiting.each do |ticket|
+          %tr{class: ("warning" if ticket.first_in_waiting?)}
+            %td.text-center= ticket.waiting_spot
+            %td= ticket.name
+            %td.text-center
+              %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
+            %td.text-center= timeago_tag (Time.now - ticket.estimated_waiting_time)
+
+.col-md-6
+  .table-responsive
+    %table.table.table-bordered.table-responsive{style: "font-size: 16px"}
+      %thead
+        %tr
+          %th.col-md-1.text-center= "#"
+          %th= "Name"
+          %th.text-center= "Specialty"
+          %th.col-md-2.text-center= "Estimated Wait Time"
+
+      %tbody
+        - @service_queues.last.tickets.waiting.each do |ticket|
+          %tr{class: ("warning" if ticket.first_in_waiting?)}
+            %td.text-center= ticket.waiting_spot
+            %td= ticket.name
+            %td.text-center
+              %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
+            %td.text-center= timeago_tag (Time.now - ticket.estimated_waiting_time)
+
+:javascript
+  $(document).ready(function() {
+    setInterval(function() { location.reload(); }, ("#{escape_javascript (@service_queues.first.refresh_interval*60000).to_s}"));
+  });
+

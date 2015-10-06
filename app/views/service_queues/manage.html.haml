@@ -32,11 +32,6 @@
           %i.fa.fa-check-circle
           Served
           %span.badge= @service_queue.tickets.served.count
-      %li{ class: ("active" if @filter_status == "data") }
-        = link_to manage_service_queue_path(@service_queue, filter_status: "data") do
-          %i.fa.fa-bar-chart
-          Data
-          %span.badge= @service_queue.tickets.served.count
 
     %br
     %br
@@ -47,8 +42,6 @@
           = render "waiting", tickets: @tickets.waiting 
         - elsif @filter_status == "served"
           = render "served", tickets: @tickets.served
-        - elsif @filter_status == "data"
-          = render "data", tickets: @tickets.served
         - else
           = render "being_served", tickets: @tickets.being_served
 

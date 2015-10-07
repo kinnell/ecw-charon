@@ -26,7 +26,7 @@
   .panel
 
     .panel-heading
-      %h1.text-center= @service_queues.last.name
+      %h1.text-center= @service_queues.second.name
     
     .panel-body
       %table.table.table-bordered.table-responsive{style: "font-size: 16px"}
@@ -38,7 +38,7 @@
             %th.col-md-2.text-center= "Estimated Wait Time"
 
         %tbody
-          - @service_queues.last.tickets.waiting.each do |ticket|
+          - @service_queues.second.tickets.waiting.each do |ticket|
             %tr{class: ("warning" if ticket.first_in_waiting?)}
               %td.text-center= ticket.waiting_spot
               %td= ticket.name

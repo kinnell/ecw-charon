@@ -2,6 +2,8 @@
   .panel-heading
     %h2
       Service Queues
+      = link_to show_all_service_queues_path, class: "btn btn-info pull-right", style: "margin-left: 5px;" do
+        %i.fa.fa-eye
       %button.btn.btn-success.pull-right{"data-toggle" => "modal", "data-target" => "#new-queue-modal"}= "Create Queue"
 
   .panel-body

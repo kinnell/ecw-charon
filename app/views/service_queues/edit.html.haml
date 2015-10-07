@@ -1,0 +1,13 @@
+.panel
+  .panel-heading
+    %h2= "Edit <b>#{@service_queue.name}</b>".html_safe
+  .panel-body
+    = form_for @service_queue do |f|
+      %h5 Queue Name:
+      = f.text_field :name, class: "form-control", required: true
+      %h5 Initial Waiting Time (min):
+      = f.number_field :initial_waiting_time, class: "form-control"
+      %h5 Published Page Refresh Interval (min):
+      = f.number_field :refresh_interval, class: "form-control"
+      = f.submit "Save", class: "btn btn-success btn-block"
+

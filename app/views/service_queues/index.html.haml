@@ -19,7 +19,7 @@
             %th.text-center Being Served
             %th.text-center Avg Service Time
             %th.text-center Finished
-            %th{style: "width: 15%"} Actions
+            %th Actions
 
         %tbody
           - @service_queues.each do |queue|
@@ -32,17 +32,29 @@
               %td.text-center= timeago_tag (Time.now - queue.average_service_time) if queue.tickets.served.any?
               %td.text-center= queue.tickets.served.count
               %td
-                = link_to manage_service_queue_path(queue), class: "btn btn-primary btn-xs" do
-                  %i.fa.fa-list-ol
+    
+                .btn-group
+                  %button.btn.btn-default.btn-sm.dropdown-toggle{ type: "button", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }}
+                    Actions
+                    %span.caret
+                  %ul.dropdown-menu
+                    %li
+                      = link_to manage_service_queue_path(queue) do
+                        %i.fa.fa-list-ol
+                        Manage Queue
+                    %li
+                      = link_to service_queue_path(queue) do
+                        %i.fa.fa-eye
+                        View Queue
+                    %li
+                      %a{"data-toggle" => "modal", "data-target" => "#edit-queue-#{queue.id}-modal"}
+                        %i.fa.fa-gear
+                        Edit Queue
 
-                = link_to service_queue_path(queue), class: "btn btn-info btn-xs" do
-                  %i.fa.fa-eye
-
-                %button.btn.btn-warning.btn-xs{"data-toggle" => "modal", "data-target" => "#edit-queue-#{queue.id}-modal"}
-                  %i.fa.fa-gear
-
-                = link_to service_queue_path(queue), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: "Are you sure?" } do
-                  %i.fa.fa-trash
+                    %li
+                      = link_to service_queue_path(queue), method: :delete, data: { confirm: "Are you sure?" } do
+                        %i.fa.fa-trash
+                        Delete Queue
 
                 = render "edit", queue: queue
 

@@ -3,10 +3,7 @@ class ServiceQueue < ActiveRecord::Base
 
   has_many :tickets, dependent: :destroy
   has_many :specialties, dependent: :destroy
-
-  def specialties_array
-    specialties ? specialties.split(", ") : [""]
-  end
+  has_many :subspecialties, dependent: :destroy
 
   def total_waiting_time_with_max(max)
     tickets.not_waiting.inject(0) { |sum, t| sum + [t.waiting_time, (max * 60)].min }

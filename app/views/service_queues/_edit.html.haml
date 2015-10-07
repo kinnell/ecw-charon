@@ -8,8 +8,6 @@
         .modal-body
           %h6 Queue Name:
           = f.text_field :name, class: "form-control", required: true
-          %h6 Specialties:
-          = f.text_field :specialties, class: "form-control"
           %h6 Initial Waiting Time (min):
           = f.number_field :initial_waiting_time, class: "form-control"
           %h6 Published Page Refresh Interval (min):

@@ -23,7 +23,7 @@
             - unless ticket.note.blank?
               %i.fa.fa-file-text-o.pull-right{style: "opacity: 0.5"}
           %td.text-center
-            %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
+            -# %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
           %td.text-center= ticket.created_at.strftime("%c")
           %td.text-center= time_ago_in_words(Time.now - ticket.waiting_time.seconds)
           %td.text-center= ticket.started_service_at && ticket.started_service_at.strftime("%c")

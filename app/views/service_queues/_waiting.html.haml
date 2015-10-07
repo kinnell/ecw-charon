@@ -21,7 +21,7 @@
             - unless ticket.note.blank?
               %i.fa.fa-file-text-o.pull-right{style: "opacity: 0.5"}
           %td.text-center
-            %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
+            -# %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
           %td.text-center= ticket.created_at.strftime("%l:%M %p")
           %td.text-center= timeago_tag (ticket.created_at), limit: 20.days.ago
           %td.text-center= timeago_tag (Time.now - ticket.estimated_waiting_time)

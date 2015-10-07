@@ -8,8 +8,6 @@
         .modal-body
           %h6 Name:
           = f.text_field :name, class: "form-control", required: true
-          %h6 Specialty:
-          = f.select :specialty, queue.specialties_array, { include_blank: "No specialty" }, class: "form-control", disabled: !(queue.specialties)
           %h6 Note (optional):
           = f.text_area :note, class: "form-control"
           = f.hidden_field :service_queue_id, value: queue.id

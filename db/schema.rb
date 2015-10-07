@@ -11,15 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151007154020) do
+ActiveRecord::Schema.define(version: 20151007162033) do
 
   create_table "service_queues", force: :cascade do |t|
-    t.string   "name",                 limit: 255,             null: false
+    t.string   "name",                             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "specialties",          limit: 255
-    t.integer  "refresh_interval",                 default: 1
-    t.integer  "initial_waiting_time",             default: 5
+    t.integer  "refresh_interval",     default: 1
+    t.integer  "initial_waiting_time", default: 5
   end
 
   create_table "specialties", force: :cascade do |t|
@@ -40,17 +39,16 @@ ActiveRecord::Schema.define(version: 20151007154020) do
   end
 
   create_table "tickets", force: :cascade do |t|
-    t.string   "name",                limit: 255,                 null: false
+    t.string   "name",                                null: false
     t.datetime "started_service_at"
     t.datetime "finished_service_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "service_queue_id"
-    t.boolean  "starred",                         default: false
+    t.boolean  "starred",             default: false
     t.text     "note"
-    t.string   "specialty",           limit: 255
-    t.boolean  "active",                          default: true
-    t.string   "removal_reason",      limit: 255
+    t.boolean  "active",              default: true
+    t.string   "removal_reason"
   end
 
   add_index "tickets", ["service_queue_id"], name: "index_tickets_on_service_queue_id"

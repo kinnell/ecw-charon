@@ -19,13 +19,13 @@ class ServiceQueuesController < ApplicationController
 
 
   def create
-    @service_queue = ServiceQueue.create(params[:service_queue].permit(:name, :specialties, :refresh_interval, :initial_waiting_time))
+    @service_queue = ServiceQueue.create(params[:service_queue].permit(:name, :refresh_interval, :initial_waiting_time))
     redirect_to :back
   end
 
   def update
     @service_queue = ServiceQueue.find(params[:id])
-    @service_queue.update(params[:service_queue].permit(:name, :specialties, :refresh_interval, :initial_waiting_time))
+    @service_queue.update(params[:service_queue].permit(:name, :refresh_interval, :initial_waiting_time))
     redirect_to :back
   end
 

@@ -11,7 +11,7 @@
             %th.col-md-1.text-center= "#"
             %th= "Name"
             %th.text-center= "Specialty"
-            %th.col-md-2.text-center= "Estimated Wait Time"
+            %th.col-md-4.text-center= "Estimated Wait Time"
 
         %tbody
           - @service_queues.first.tickets.waiting.each do |ticket|
@@ -19,7 +19,7 @@
               %td.text-center= ticket.waiting_spot
               %td= ticket.name
               %td.text-center
-                %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
+                -# %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
               %td.text-center= timeago_tag (Time.now - ticket.estimated_waiting_time)
 
 .col-md-6
@@ -35,7 +35,7 @@
             %th.col-md-1.text-center= "#"
             %th= "Name"
             %th.text-center= "Specialty"
-            %th.col-md-2.text-center= "Estimated Wait Time"
+            %th.col-md-4.text-center= "Estimated Wait Time"
 
         %tbody
           - @service_queues.second.tickets.waiting.each do |ticket|
@@ -43,7 +43,7 @@
               %td.text-center= ticket.waiting_spot
               %td= ticket.name
               %td.text-center
-                %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
+                -# %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
               %td.text-center= timeago_tag (Time.now - ticket.estimated_waiting_time)
 
 :javascript

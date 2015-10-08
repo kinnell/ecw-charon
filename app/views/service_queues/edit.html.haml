@@ -20,6 +20,14 @@
         = s.text_field :name, class: "form-control", required: true
         = s.number_field :number_of_workers, class: "form-control"
         = s.link_to_remove "Remove"
+        %ul
+          = s.fields_for :subspecialties do |ss|
+            %li
+              = ss.text_field :name, class: "form-control", required: true
+              = ss.number_field :number_of_workers, class: "form-control"
+              = ss.link_to_remove "x"
+          = s.link_to_add "Add a subspecialty", :subspecialties
+
 
       = f.link_to_add "Add A Specialty", :specialties
 

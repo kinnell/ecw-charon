@@ -29,7 +29,7 @@ class ServiceQueuesController < ApplicationController
 
   def update
     @service_queue = ServiceQueue.find(params[:id])
-    @service_queue.update(params[:service_queue].permit(:name, :refresh_interval, :initial_waiting_time, specialties_attributes: [:id, :name, :number_of_workers, :_destroy]))
+    @service_queue.update(params[:service_queue].permit(:name, :refresh_interval, :initial_waiting_time, specialties_attributes: [:id, :name, :number_of_workers, :_destroy, subspecialties_attributes: [:id, :name, :number_of_workers, :_destroy]]))
     redirect_to :back
   end
 

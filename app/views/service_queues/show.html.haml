@@ -18,7 +18,7 @@
               %td.text-center= ticket.waiting_spot
               %td= ticket.name
               %td.text-center
-                -# %span.label.label-primary= ticket.specialty.upcase if ticket.specialty
+                %span.label.label-primary{style: "background-color: #{ticket.subspecialty.specialty.badge_color}"}= ticket.subspecialty.name.upcase if ticket.subspecialty
               %td.text-center= timeago_tag (Time.now - ticket.estimated_waiting_time)
 
 :javascript

@@ -9,12 +9,12 @@
           %h6 Name:
           = f.text_field :name, class: "form-control", required: true
           %h6 Queue:
-          = f.collection_select :service_queue_id, ServiceQueue.all, :id, :name, {}, { class: "form-control", disabled: true }
+          = f.collection_select :service_queue_id, ServiceQueue.all, :id, :name, {}, { class: "form-control" }
           %h6 Subspecialty:
           = f.grouped_collection_select :subspecialty_id, queue.specialties, :subspecialties, :name, :id, :name, {}, { class: "form-control" }
           %h6 Note (optional):
           = f.text_area :note, class: "form-control"
-          = f.hidden_field :service_queue_id, value: queue.id
+
         .modal-footer
           = f.submit "Create Ticket", class: "btn btn-success btn-block"
 

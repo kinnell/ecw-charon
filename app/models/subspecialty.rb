@@ -4,6 +4,8 @@ class Subspecialty < ActiveRecord::Base
   belongs_to :service_queue  
   before_create :set_service_queue
 
+  has_many :tickets, dependent: :destroy
+
   def set_service_queue
     self.service_queue_id ||= specialty.service_queue.id
   end

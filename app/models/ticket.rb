@@ -2,6 +2,7 @@ class Ticket < ActiveRecord::Base
   validates :name, presence: true
 
   belongs_to :service_queue	
+  belongs_to :subspecialty
 
   scope :active, -> { where(active: true) }
 

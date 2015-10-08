@@ -14,9 +14,9 @@
         = f.number_field :refresh_interval, class: "form-control"
 
       %hr
-
       
       = f.fields_for :specialties do |s|
+        = s.hidden_field :badge_color, as: :minicolors, class: "form-control minicolors-input"
         = s.text_field :name, class: "form-control", required: true
         = s.number_field :number_of_workers, class: "form-control"
         = s.link_to_remove "Remove"
@@ -28,7 +28,11 @@
               = ss.link_to_remove "x"
           = s.link_to_add "Add a subspecialty", :subspecialties
 
-
       = f.link_to_add "Add A Specialty", :specialties
 
       = f.submit "Save", class: "btn btn-success btn-block"
+
+:javascript
+  $(document).ready(function() {
+    $(".minicolors-input").minicolors();
+  });

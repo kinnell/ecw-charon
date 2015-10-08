@@ -56,6 +56,9 @@ GEM
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
+    jquery-minicolors-rails (2.1.4.0)
+      jquery-rails
+      rails (>= 3.2.8)
     jquery-rails (4.0.5)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
@@ -150,6 +153,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   haml
   jbuilder (~> 1.2)
+  jquery-minicolors-rails
   jquery-rails
   nested_form
   newrelic_rpm

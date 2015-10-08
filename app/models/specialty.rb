@@ -1,5 +1,6 @@
 class Specialty < ActiveRecord::Base
   validates :name, presence: true
+  validates :badge_color, presence: true
 
   belongs_to :service_queue
   has_many :subspecialties, dependent: :destroy

@@ -17,3 +17,4 @@
 //= require bootstrap
 //= require rails-timeago
 //= require jquery_nested_form
+//= require jquery.minicolors

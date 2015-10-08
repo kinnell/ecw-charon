@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151008160333) do
+ActiveRecord::Schema.define(version: 20151008183958) do
 
   create_table "service_queues", force: :cascade do |t|
     t.string   "name",                             null: false
@@ -23,10 +23,11 @@ ActiveRecord::Schema.define(version: 20151008160333) do
 
   create_table "specialties", force: :cascade do |t|
     t.integer  "service_queue_id"
-    t.string   "name",                          null: false
+    t.string   "name",                                  null: false
     t.integer  "number_of_workers", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "badge_color",       default: "#428BCA"
   end
 
   create_table "subspecialties", force: :cascade do |t|

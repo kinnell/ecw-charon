@@ -26,3 +26,4 @@ end
 gem "puma"
 gem "newrelic_rpm"
 gem "nested_form"
+gem "jquery-minicolors-rails"

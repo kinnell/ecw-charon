@@ -19,7 +19,7 @@
             = ticket.waiting_spot
           %td
             = ticket.name.truncate(40)
-            - if ticket.note
+            - unless ticket.note.blank?
               %i.fa.fa-file-text-o.pull-right{style: "opacity: 0.5"}
           %td.text-center
             %span.label.label-primary{style: "background-color: #{ticket.subspecialty.specialty.badge_color}"}= ticket.subspecialty.name.upcase if ticket.subspecialty

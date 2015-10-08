@@ -9,4 +9,8 @@ class Subspecialty < ActiveRecord::Base
   def set_service_queue
     self.service_queue_id ||= specialty.service_queue.id
   end
+
+  def available_number_of_workers
+    number_of_workers - tickets.being_served.count
+  end
 end  

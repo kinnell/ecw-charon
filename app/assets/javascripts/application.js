@@ -16,3 +16,4 @@
 //= require_tree .
 //= require bootstrap
 //= require rails-timeago
+//= require jquery_nested_form

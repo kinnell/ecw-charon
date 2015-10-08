@@ -2,12 +2,25 @@
   .panel-heading
     %h2= "Edit <b>#{@service_queue.name}</b>".html_safe
   .panel-body
-    = form_for @service_queue do |f|
-      %h5 Queue Name:
-      = f.text_field :name, class: "form-control", required: true
-      %h5 Initial Waiting Time (min):
-      = f.number_field :initial_waiting_time, class: "form-control"
-      %h5 Published Page Refresh Interval (min):
-      = f.number_field :refresh_interval, class: "form-control"
-      = f.submit "Save", class: "btn btn-success btn-block"
+    = nested_form_for @service_queue, html: { class: "form-inline" } do |f|
+      .form-group.col-md-4.col-sm-12
+        %label Queue Name:
+        = f.text_field :name, class: "form-control", required: true
+      .form-group.col-md-4.col-sm-12
+        %label Initial Wait Time (min):
+        = f.number_field :initial_waiting_time, class: "form-control"
+      .form-group.col-md-4.col-sm-12
+        %label Refresh Interval (min):
+        = f.number_field :refresh_interval, class: "form-control"
 
+      %hr
+
+      
+      = f.fields_for :specialties do |s|
+        = s.text_field :name, class: "form-control", required: true
+        = s.number_field :number_of_workers, class: "form-control"
+        = s.link_to_remove "Remove"
+
+      = f.link_to_add "Add A Specialty", :specialties
+
+      = f.submit "Save", class: "btn btn-success btn-block"

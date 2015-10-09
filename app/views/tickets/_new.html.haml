@@ -9,7 +9,7 @@
           %h6 Name:
           = f.text_field :name, class: "form-control", required: true
           %h6 Queue:
-          = f.collection_select :service_queue_id, ServiceQueue.all, :id, :name, {}, { class: "form-control" }
+          = f.collection_select :service_queue_id, ServiceQueue.all, :id, :name, {}, { class: "form-control", onchange: "$('#ticket_subspecialty_id').replaceWith('#{}');"}
           %h6 Subspecialty:
           = f.grouped_collection_select :subspecialty_id, queue.specialties, :subspecialties, :name, :id, :name, {}, { class: "form-control" }
           %h6 Note (optional):

@@ -14,7 +14,7 @@
               = s.fields_for :subspecialties do |ss|
                 %li
                   = ss.text_field :name, class: "form-control", disabled: true
-                  = ss.number_field :number_of_workers, class: "form-control"
+                  = ss.select :number_of_workers, options_for_select(0..10, ss.object.number_of_workers), {}, { class: "form-control" }
 
         .modal-footer
           = f.submit "Save", class: "btn btn-success btn-block"

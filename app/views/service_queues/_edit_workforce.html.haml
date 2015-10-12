@@ -1,0 +1,22 @@
+.modal.fade{id: "edit-queue-workforce-modal", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-md
+    .modal-content
+
+      = nested_form_for @service_queue, html: { class: "form-inline" } do |f|
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+          %h4.modal-title.text-center= "Edit Queue Workforce".html_safe
+        .modal-body{style: "padding-top: 20px"}
+          = f.fields_for :specialties do |s|
+            = s.hidden_field :badge_color, as: :minicolors, class: "form-control minicolors-input"
+            = s.text_field :name, class: "form-control", disabled: true
+            %ul
+              = s.fields_for :subspecialties do |ss|
+                %li
+                  = ss.text_field :name, class: "form-control", disabled: true
+                  = ss.number_field :number_of_workers, class: "form-control"
+
+        .modal-footer
+          = f.submit "Save", class: "btn btn-success btn-block"
+
+

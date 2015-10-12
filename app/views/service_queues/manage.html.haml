@@ -5,6 +5,9 @@
       = link_to service_queue_path(@service_queue), class: "btn btn-info pull-right", style: "margin-left: 5px;" do
         %i.fa.fa-eye
 
+      %button.btn.btn-warning.pull-right{style: "margin-left: 5px;", data: { toggle: "modal", target: "#edit-queue-workforce-modal" } }
+        %i.fa.fa-users
+
       = link_to edit_service_queue_path(@service_queue), class: "btn btn-warning pull-right", style: "margin-left: 5px" do  
         %i.fa.fa-gear
 
@@ -13,6 +16,7 @@
         Create Ticket
 
     = render "edit", queue: @service_queue
+    = render "edit_workforce", queue: @service_queue
 
   .panel-body
 

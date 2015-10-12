@@ -52,27 +52,36 @@ class Ticket < ActiveRecord::Base
   end
 
   def waiting_spot
-    if waiting?
-      if subspecialty.available_number_of_workers > subspecialty.tickets.waiting.index(self)
-        1
-      else
-        subspecialty.tickets.waiting.index(self) - subspecialty.available_number_of_workers + 2
-      end
-    end
+    subspecialty.tickets.waiting.index(self)+1 if waiting?
+    # if waiting?
+    #   if subspecialty.available_number_of_workers > subspecialty.tickets.waiting.index(self)
+    #     1
+    #   else
+    #     subspecialty.tickets.waiting.index(self) - subspecialty.available_number_of_workers + 2
+    #   end
+    # end
   end
 
   def first_in_waiting?
-    waiting_spot == 1
+    waiting_spot == 1 || estimated_waiting_time == 0
   end
 
   def estimated_waiting_time
     if waiting?
-      max_waiting_time = 30
-      # wait_according_to_time_waited = waiting_time > max_waiting_time*60 ? 1 : (max_waiting_time*60 - waiting_time)
-      wait_according_to_waiting_spot = service_queue.average_waiting_time_compounded(10) * (waiting_spot - 1)
-      wait_according_to_waiting_spot
-      # [wait_according_to_time_waited, wait_according_to_waiting_spot].min
+      waiting_spot_in_subspecialty = subspecialty.tickets.waiting.index(self)+1
+      if waiting_spot_in_subspecialty <= subspecialty.available_number_of_workers
+        0
+      elsif subspecialty.number_of_workers > 0
+        (waiting_spot_in_subspecialty / subspecialty.number_of_workers.to_f).ceil * service_queue.average_waiting_time_compounded(10)
+      else
+        waiting_spot_in_subspecialty * service_queue.average_waiting_time_compounded(10)
+      end
     end
+      # max_waiting_time = 30
+      # wait_according_to_time_waited = waiting_time > max_waiting_time*60 ? 1 : (max_waiting_time*60 - waiting_time)
+      # wait_according_to_waiting_spot = service_queue.average_waiting_time_compounded(10) * (waiting_spot - 1)
+      # wait_according_to_waiting_spot
+      # [wait_according_to_time_waited, wait_according_to_waiting_spot].min
   end
 
 end

@@ -18,12 +18,13 @@
       = f.fields_for :specialties do |s|
         = s.hidden_field :badge_color, as: :minicolors, class: "form-control minicolors-input"
         = s.text_field :name, class: "form-control", required: true
-        = s.number_field :number_of_workers, class: "form-control"
+        -# = s.number_field :number_of_workers, class: "form-control"
         = s.link_to_remove "Remove"
         %ul
           = s.fields_for :subspecialties do |ss|
             %li
               = ss.text_field :name, class: "form-control", required: true
+              -# = ss.select :number_of_workers, options_for_select(0..10), {}, { class: "form-control" }
               = ss.number_field :number_of_workers, class: "form-control"
               = ss.link_to_remove "x"
           = s.link_to_add "Add a subspecialty", :subspecialties

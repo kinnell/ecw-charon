@@ -21,7 +21,6 @@ class ServiceQueuesController < ApplicationController
     @tickets = @service_queue.tickets
   end
 
-
   def create
     @service_queue = ServiceQueue.create(params[:service_queue].permit(:name, :refresh_interval, :initial_waiting_time))
     redirect_to :back
@@ -38,4 +37,5 @@ class ServiceQueuesController < ApplicationController
     @service_queue.destroy
     redirect_to :back
   end
+
 end

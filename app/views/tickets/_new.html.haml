@@ -1,18 +1,18 @@
-.modal.fade{id: "new-ticket-for-queue-#{queue.id}-modal", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+.modal.fade{id: "new-ticket-modal", "aria-hidden" => "true", "aria-labelledby" => "NewTicketModal", role: "dialog", tabindex: "-1"}
   .modal-dialog.modal-sm
+
     .modal-content
-      = form_for queue.tickets.new do |f|
+      = form_for Ticket.new do |f|
         .modal-header
           %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
-          %h4.modal-title.text-center= "Create a ticket for <b>#{queue.name}</b>".html_safe
+          %h4.modal-title.text-center= "Create a ticket"
         .modal-body
           %h6 Name:
           = f.text_field :name, class: "form-control", required: true
           %h6 Queue:
           = f.collection_select :service_queue_id, ServiceQueue.all, :id, :name,
-            {},
-            { class: "form-control", disabled: true }
-          = f.hidden_field :service_queue_id, value: queue.id
+            { selected: queue.id },
+            { class: "form-control" }
           %h6 Subspecialty:
           = f.grouped_collection_select :subspecialty_id, queue.specialties, :subspecialties, :name, :id, :name, {}, { class: "form-control" }
           %h6 Note (optional):
@@ -21,3 +21,10 @@
         .modal-footer
           = f.submit "Create Ticket", class: "btn btn-success btn-block"
 
+:javascript
+  $(document).ready(function() {
+    $("#ticket_service_queue_id").change(function () {
+      var queue_id = $("#ticket_service_queue_id").val();
+      $("#ticket_subspecialty_id").empty();
+    });
+  });

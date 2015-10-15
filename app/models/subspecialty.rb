@@ -2,6 +2,7 @@ class Subspecialty < ActiveRecord::Base
   validates :name, presence: true
   belongs_to :specialty
   belongs_to :service_queue  
+
   before_create :set_service_queue
 
   has_many :tickets, dependent: :destroy

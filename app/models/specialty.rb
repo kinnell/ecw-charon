@@ -13,7 +13,11 @@ class Specialty < ActiveRecord::Base
   end
 
   def number_of_nonspecialized_workers
-    number_of_workers - subspecialties.sum(:number_of_workers)
+    number_of_workers - number_of_specialized_workers
+  end
+
+  def number_of_specialized_workers
+    subspecialties.sum(:number_of_workers)
   end
 
 end

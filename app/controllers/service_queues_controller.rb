@@ -1,4 +1,6 @@
 class ServiceQueuesController < ApplicationController
+  respond_to :html, :js
+
   def index
     @service_queues = ServiceQueue.all
   end
@@ -22,20 +24,27 @@ class ServiceQueuesController < ApplicationController
   end
 
   def create
-    @service_queue = ServiceQueue.create(params[:service_queue].permit(:name, :refresh_interval, :initial_waiting_time))
+    @service_queue = ServiceQueue.create(service_queue_params)
     redirect_to :back
   end
 
   def update
     @service_queue = ServiceQueue.find(params[:id])
-    @service_queue.update(params[:service_queue].permit(:name, :refresh_interval, :initial_waiting_time, specialties_attributes: [:id, :name, :number_of_workers, :_destroy, :badge_color, subspecialties_attributes: [:id, :name, :number_of_workers, :_destroy]]))
-    redirect_to :back
+    @service_queue.update(service_queue_params)
   end
 
   def destroy
     @service_queue = ServiceQueue.find(params[:id])
     @service_queue.destroy
     redirect_to :back
+  end
+
+  private
+
+  def service_queue_params
+    params[:service_queue].permit(:name, :refresh_interval, :initial_waiting_time,
+                                  specialties_attributes: [:id, :name, :number_of_workers, :_destroy, :badge_color,
+                                                           subspecialties_attributes: [:id, :name, :number_of_workers, :_destroy]])
   end
 
 end

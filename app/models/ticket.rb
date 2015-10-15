@@ -62,6 +62,10 @@ class Ticket < ActiveRecord::Base
     # end
   end
 
+  def waiting_spot_in_queue
+    service_queue.tickets.waiting.sort_by(&:estimated_waiting_time).index(self)+1 if waiting?
+  end
+
   def first_in_waiting?
     waiting_spot == 1 || estimated_waiting_time == 0
   end

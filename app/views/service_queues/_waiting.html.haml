@@ -11,11 +11,11 @@
         %th{style: "width: 15%"} Actions
 
     %tbody
-      - tickets.waiting.sort_by(&:waiting_spot).each do |ticket|
+      - tickets.waiting.sort_by(&:estimated_waiting_time).each do |ticket|
         %tr{class: ticket.color}
           %td
             = render "tickets/star", ticket: ticket
-            = ticket.waiting_spot
+            = ticket.waiting_spot_in_queue
           %td
             = ticket.name.truncate(40)
             - unless ticket.note.blank?

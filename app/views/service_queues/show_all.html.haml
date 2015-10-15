@@ -15,9 +15,9 @@
               %th.col-md-4.text-center= "Estimated Wait Time"
 
           %tbody
-            - service_queue.tickets.waiting.sort_by(&:waiting_spot).each do |ticket|
+            - service_queue.tickets.waiting.sort_by(&:estimated_waiting_time).each do |ticket|
               %tr{class: ("warning" if ticket.first_in_waiting?)}
-                %td.text-center= ticket.waiting_spot
+                %td.text-center= ticket.waiting_spot_in_queue
                 %td= ticket.name
                 %td.text-center
                   %span.label.label-primary{style: "background-color: #{ticket.subspecialty.specialty.badge_color}; font-size: 90%;"}= ticket.subspecialty.name.upcase if ticket.subspecialty

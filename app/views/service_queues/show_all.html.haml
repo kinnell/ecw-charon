@@ -25,7 +25,6 @@
 
 :javascript
   $(document).ready(function() {
-    $(".container").addClass("container-fluid").removeClass("container");
     setInterval(function() { location.reload(); }, ("#{escape_javascript (@service_queues.first.refresh_interval*60000).to_s}"));
   });
 

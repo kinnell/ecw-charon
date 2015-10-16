@@ -10,13 +10,13 @@
   %body
 
     %nav.navbar.navbar-default{role: "navigation"}
-      .container
+      .container-fluid
         .navbar-header.pull-left
           = link_to root_path do
             .navbar-brand.logo= "eClinicalWorks"
         .navbar-header.pull-right
           .navbar-brand.sublogo="Users Conference 2015"
 
-    .container
+    .container-fluid
       = yield
 

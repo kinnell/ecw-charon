@@ -10,7 +10,7 @@
 
         .modal-body{style: "padding-top: 20px"}
           .alert.alert-success{ style: "display: none; text-align: center;" }= "Updated!"
-          = f.fields_for :specialties do |s|
+          = f.fields_for :specialties.order(:id) do |s|
             .input-group{ style: "margin-bottom: 10px" }
               .input-group-addon= "Specialty"
               = s.text_field :name, class: "form-control", disabled: true
@@ -19,7 +19,7 @@
               { class: "form-control", onchange: "$(this).parents('form').submit()" }
 
             %ul{ style: "list-style-type: none" }
-              = s.fields_for :subspecialties do |ss|
+              = s.fields_for :subspecialties.order(:id) do |ss|
                 %li
                   .input-group{ style: "margin-bottom: 10px" }
                     .input-group-addon= "Subspecialty"

@@ -15,6 +15,10 @@ class Ticket < ActiveRecord::Base
   scope :starred, -> { where(starred: true) }
   scope :not_starred, -> { where(starred: false) }
 
+  def name=(s)
+    super s.titleize
+  end
+
   def status
     if finished_service_at
       "Served"

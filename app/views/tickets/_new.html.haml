@@ -12,7 +12,8 @@
           %h6 Queue:
           = f.collection_select :service_queue_id, ServiceQueue.all, :id, :name,
             { selected: queue.id },
-            { class: "form-control" }
+            { class: "form-control", disabled: true }
+          = f.hidden_field :service_queue_id, value: queue.id
           %h6 Subspecialty:
           = f.grouped_collection_select :subspecialty_id, queue.specialties, :subspecialties, :name, :id, :name, {}, { class: "form-control" }
           %h6 Note (optional):

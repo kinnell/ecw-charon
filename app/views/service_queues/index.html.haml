@@ -47,7 +47,7 @@
                         %i.fa.fa-eye
                         View Queue
                     %li
-                      = link_to edit_service_queue_path(queue) do
+                      %a{ data: { toggle: "modal", target: "#edit-queue-#{queue.id}-modal" } }
                         %i.fa.fa-gear
                         Edit Queue
 

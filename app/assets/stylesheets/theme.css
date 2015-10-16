@@ -151,8 +151,3 @@ h6 { font-weight: 600; margin-top: 15px; }
   background-color: #FAFAFA;
 }
 
-.minicolors-swatch, .minicolors-swatch-color {
-  border-radius: 100px;
-  height: 28px;
-  width: 28px;
-}

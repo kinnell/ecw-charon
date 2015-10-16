@@ -20,15 +20,20 @@
       
       = f.fields_for :specialties do |s|
         = s.hidden_field :badge_color, as: :minicolors, class: "form-control minicolors-input"
-        = s.text_field :name, class: "form-control", required: true
-        = s.select :number_of_workers, options_for_select(0..100, s.object.number_of_workers), {}, { class: "form-control" }
-        = s.link_to_remove "Remove"
+        .input-group
+          .input-group-addon= Specialty
+          = s.text_field :name, class: "form-control", required: true
+        = s.link_to_remove do
+          %button.btn.btn-danger.btn-sm{ style: "margin-bottom: 10px" }
+            %i.fa.fa-trash-o
         %ul
           = s.fields_for :subspecialties do |ss|
             %li
               = ss.text_field :name, class: "form-control", required: true
-              = ss.select :number_of_workers, options_for_select(0..10, ss.object.number_of_workers), {}, { class: "form-control" }
-              = ss.link_to_remove "x"
+              - if ss.object.tickets.none?
+                = ss.link_to_remove do
+                  %button.btn.btn-danger.btn-sm{ style: "margin-bottom: 10px" }
+                    %i.fa.fa-trash-o
           = s.link_to_add "Add a subspecialty", :subspecialties
 
       = f.link_to_add "Add A Specialty", :specialties

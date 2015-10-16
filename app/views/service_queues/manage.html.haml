@@ -2,7 +2,7 @@
   .panel-heading
     %h2
       = @service_queue.name
-      = link_to service_queue_path(@service_queue), class: "btn btn-info pull-right", style: "margin-left: 5px;" do
+      = link_to show_all_service_queues_path, class: "btn btn-info pull-right", style: "margin-left: 5px;" do
         %i.fa.fa-eye
 
       %button.btn.btn-warning.pull-right{style: "margin-left: 5px;", data: { toggle: "modal", target: "#edit-queue-workforce-modal" } }

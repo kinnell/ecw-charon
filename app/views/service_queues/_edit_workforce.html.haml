@@ -6,19 +6,24 @@
 
         .modal-header
           %button.close{ aria: { hidden: true }, data: { dismiss: "modal" }, type: "button" } ×
-          %h4.modal-title.text-center= "Edit QueueWorkforce".html_safe
+          %h4.modal-title.text-center= "Edit Queue Workforce".html_safe
 
         .modal-body{style: "padding-top: 20px"}
+          .alert.alert-success{ style: "display: none; text-align: center;" }= "Updated!"
           = f.fields_for :specialties do |s|
-            = s.hidden_field :badge_color, as: :minicolors, class: "form-control minicolors-input"
-            = s.text_field :name, class: "form-control", disabled: true
+            .input-group{ style: "margin-bottom: 10px" }
+              .input-group-addon= "Specialty"
+              = s.text_field :name, class: "form-control", disabled: true
             = s.select :number_of_workers,
               options_for_select(s.object.number_of_specialized_workers..100, s.object.number_of_workers), {},
               { class: "form-control", onchange: "$(this).parents('form').submit()" }
-            %ul
+
+            %ul{ style: "list-style-type: none" }
               = s.fields_for :subspecialties do |ss|
                 %li
-                  = ss.text_field :name, class: "form-control", disabled: true
+                  .input-group{ style: "margin-bottom: 10px" }
+                    .input-group-addon= "Subspecialty"
+                    = ss.text_field :name, class: "form-control", disabled: true
                   = ss.select :number_of_workers, options_for_select(0..(ss.object.number_of_workers + s.object.number_of_nonspecialized_workers), ss.object.number_of_workers), {},
                     { class: "form-control", onchange: "$(this).parents('form').submit()" }
 

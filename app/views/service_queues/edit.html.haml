@@ -1,7 +1,7 @@
 .panel
   = nested_form_for @service_queue, html: { class: "form-inline" } do |f|
     .panel-heading
-      = link_to manage_service_queue_path(@service_queue) do
+      = link_to :back do
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
       %h2.text-center= "Edit <b>#{@service_queue.name}</b>".html_safe
 

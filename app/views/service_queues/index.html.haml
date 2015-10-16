@@ -47,7 +47,7 @@
                         %i.fa.fa-eye
                         View Queue
                     %li
-                      %a{ data: { toggle: "modal", target: "#edit-queue-#{queue.id}-modal" } }
+                      = link_to edit_service_queue_path(queue) do
                         %i.fa.fa-gear
                         Edit Queue
 
@@ -56,6 +56,5 @@
                         %i.fa.fa-trash
                         Delete Queue
 
-                = render "edit", queue: queue
 
     = render "new"

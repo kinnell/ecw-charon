@@ -33,6 +33,12 @@ class ServiceQueuesController < ApplicationController
     @service_queue.update(service_queue_params)
   end
 
+  def update_workforce
+    @service_queue = ServiceQueue.find(params[:id])
+    @service_queue.update(service_queue_params)
+    @test = service_queue_params["specialties_attributes"].to_a
+  end
+
   def destroy
     @service_queue = ServiceQueue.find(params[:id])
     @service_queue.destroy

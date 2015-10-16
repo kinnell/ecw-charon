@@ -13,24 +13,24 @@
         %thead
           %tr
             %th{style: "width: 15%"} Name
-            %th.text-center Tickets
             %th.text-center Waiting
-            %th.text-center Avg Wait Time
             %th.text-center Being Served
-            %th.text-center Avg Service Time
             %th.text-center Finished
+            %th.text-center Total
+            %th.text-center Avg Wait Time
+            %th.text-center Avg Service Time
             %th Actions
 
         %tbody
           - @service_queues.each do |queue|
             %tr
               %td= link_to queue.name, manage_service_queue_path(queue)
-              %td.text-center= queue.tickets.active.count
               %td.text-center= queue.tickets.waiting.count
-              %td.text-center= timeago_tag (Time.now - queue.average_waiting_time) if queue.tickets.not_waiting.any?
               %td.text-center= queue.tickets.being_served.count
-              %td.text-center= timeago_tag (Time.now - queue.average_service_time) if queue.tickets.served.any?
               %td.text-center= queue.tickets.served.count
+              %td.text-center= queue.tickets.active.count
+              %td.text-center= timeago_tag (Time.now - queue.average_waiting_time) if queue.tickets.not_waiting.any?
+              %td.text-center= timeago_tag (Time.now - queue.average_service_time) if queue.tickets.served.any?
               %td
     
                 .btn-group
@@ -43,18 +43,8 @@
                         %i.fa.fa-list-ol
                         Manage Queue
                     %li
-                      = link_to service_queue_path(queue) do
-                        %i.fa.fa-eye
-                        View Queue
-                    %li
                       = link_to edit_service_queue_path(queue) do
                         %i.fa.fa-gear
                         Edit Queue
-
-                    %li
-                      = link_to service_queue_path(queue), method: :delete, data: { confirm: "Are you sure?" } do
-                        %i.fa.fa-trash
-                        Delete Queue
-
 
     = render "new"

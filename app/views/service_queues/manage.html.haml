@@ -5,7 +5,7 @@
       = link_to show_all_service_queues_path, class: "btn btn-info pull-right", style: "margin-left: 5px;" do
         %i.fa.fa-eye
 
-      %button.btn.btn-warning.pull-right{style: "margin-left: 5px;", data: { toggle: "modal", target: "#edit-queue-workforce-modal" } }
+      = link_to edit_workforce_service_queue_path(@service_queue), class: "btn btn-warning pull-right", style: "margin-left: 5px;" do
         %i.fa.fa-users
 
       = link_to edit_service_queue_path(@service_queue), class: "btn btn-warning pull-right", style: "margin-left: 5px;" do
@@ -14,8 +14,6 @@
       %button.btn.btn-success.pull-right{"data-toggle" => "modal", "data-target" => "#new-ticket-modal"}
         %i.fa.fa-user{style: "margin-right: 5px;"}
         Create Ticket
-
-    = render "edit_workforce", queue: @service_queue
 
   .panel-body
 

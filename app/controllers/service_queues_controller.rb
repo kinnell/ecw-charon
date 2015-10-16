@@ -31,6 +31,7 @@ class ServiceQueuesController < ApplicationController
   def update
     @service_queue = ServiceQueue.find(params[:id])
     @service_queue.update(service_queue_params)
+    redirect_to :back
   end
 
   def update_workforce

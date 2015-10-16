@@ -22,40 +22,41 @@
 
       %br
 
-      = f.fields_for :specialties do |s|
-        .input-group{ style: "margin-bottom: 10px" }
-          .input-group-addon= "Specialty"
-          .input-group-addon
-            = s.hidden_field :badge_color, as: :minicolors, class: "minicolors-input"
-          = s.text_field :name, class: "form-control", required: true
+      %center
+        = f.fields_for :specialties do |s|
+          .input-group{ style: "margin-bottom: 10px" }
+            .input-group-addon= "Specialty"
+            .input-group-addon
+              = s.hidden_field :badge_color, as: :minicolors, class: "minicolors-input"
+            = s.text_field :name, class: "form-control", required: true
 
-        = s.link_to_add :subspecialties, data: { target: "#new-subspecialty-#{s.object.id}" } do
-          %button.btn.btn-success.btn-sm{ style: "margin-bottom: 10px" }= "Add Subspecialty"
-        - if s.object.tickets.none?
-          = s.link_to_remove do
-            %button.btn.btn-danger.btn-sm{ style: "margin-bottom: 10px" }
+          = s.link_to_add :subspecialties, data: { target: "#new-subspecialty-#{s.object.id}" } do
+            %button.btn.btn-success.btn-sm{ style: "margin-bottom: 10px" }= "Add Subspecialty"
+          - if s.object.tickets.none?
+            = s.link_to_remove do
+              %button.btn.btn-danger.btn-sm{ style: "margin-bottom: 10px" }
+                %i.fa.fa-trash-o
+          - else
+            %button.disabled.btn.btn-danger.btn-sm{ style: "margin-bottom: 10px" }
               %i.fa.fa-trash-o
-        - else
-          %button.disabled.btn.btn-danger.btn-sm{ style: "margin-bottom: 10px" }
-            %i.fa.fa-trash-o
 
-        %ul{ style: "list-style-type: none" }
-          = s.fields_for :subspecialties do |ss|
-            %li
-              .input-group{ style: "margin-bottom: 10px" }
-                .input-group-addon= "Subspecialty"
-                = ss.text_field :name, class: "form-control", required: true
-              - if ss.object.tickets.none?
-                = ss.link_to_remove do
-                  %button.btn.btn-danger.btn-sm{ style: "margin-bottom: 10px" }
+          %ul{ style: "list-style-type: none" }
+            = s.fields_for :subspecialties do |ss|
+              %li
+                .input-group{ style: "margin-bottom: 10px" }
+                  .input-group-addon= "Subspecialty"
+                  = ss.text_field :name, class: "form-control", required: true
+                - if ss.object.tickets.none?
+                  = ss.link_to_remove do
+                    %button.btn.btn-danger.btn-sm{ style: "margin-bottom: 10px" }
+                      %i.fa.fa-trash-o{ style: "margin-right: 0px" }
+                - else
+                  %button.disabled.btn.btn-danger.btn-sm{ style: "margin-bottom: 10px" }
                     %i.fa.fa-trash-o{ style: "margin-right: 0px" }
-              - else
-                %button.disabled.btn.btn-danger.btn-sm{ style: "margin-bottom: 10px" }
-                  %i.fa.fa-trash-o{ style: "margin-right: 0px" }
 
-          %div{ id: "new-subspecialty-#{s.object.id}" }
+            %div{ id: "new-subspecialty-#{s.object.id}" }
 
-      %div#new-specialty
+        %div#new-specialty
 
     .panel-footer
       = f.submit "Save", class: "btn btn-success btn-block"

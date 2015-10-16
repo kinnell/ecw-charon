@@ -2,7 +2,7 @@
   .modal-dialog.modal-md
     .modal-content
 
-      = nested_form_for @service_queue, url: update_workforce_service_queue_path(@service_queue), remote: true, html: { class: "form-inline" } do |f|
+      = nested_form_for queue, url: update_workforce_service_queue_path(queue), remote: true, html: { class: "form-inline" } do |f|
 
         .modal-header
           %button.close{ aria: { hidden: true }, data: { dismiss: "modal" }, type: "button" } ×

@@ -1,13 +1,13 @@
 .btn-group{ role: "group" }
-  = link_to ticket_path(ticket, ticket: {started_service_at: DateTime.now}), method: :patch, class: "btn btn-success btn-xs", disabled: (ticket.waiting?).! do
+  = link_to ticket_path(ticket, ticket: {started_service_at: DateTime.now}), method: :patch, class: "btn btn-success btn-sm", disabled: (ticket.waiting?).! do
     %i.fa.fa-play
 
-  = link_to ticket_path(ticket, ticket: {finished_service_at: DateTime.now}), method: :patch, class: "btn btn-info btn-xs", disabled: (ticket.being_served?).! do
+  = link_to ticket_path(ticket, ticket: {finished_service_at: DateTime.now}), method: :patch, class: "btn btn-info btn-sm", disabled: (ticket.being_served?).! do
     %i.fa.fa-check
 
-  = link_to edit_ticket_path(ticket), remote: true, class: "btn btn-warning btn-xs" do
+  = link_to edit_ticket_path(ticket), remote: true, class: "btn btn-warning btn-sm" do
     %i.fa.fa-pencil
 
-  = link_to deactivate_ticket_path(ticket), remote: true, class: "btn btn-danger btn-xs" do
+  = link_to deactivate_ticket_path(ticket), remote: true, class: "btn btn-danger btn-sm" do
     %i.fa.fa-trash
 

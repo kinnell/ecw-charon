@@ -5,15 +5,11 @@
       = form_for Ticket.new do |f|
         .modal-header
           %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
-          %h4.modal-title.text-center= "Create a ticket"
+          %h4.modal-title.text-center= "Create a ticket in <b>#{queue.name}</b>".html_safe
         .modal-body
           %h6 Name:
-          = f.text_field :name, class: "form-control", required: true
-          %h6 Queue:
-          = f.collection_select :service_queue_id, ServiceQueue.all, :id, :name,
-            { selected: queue.id },
-            { class: "form-control", disabled: true }
           = f.hidden_field :service_queue_id, value: queue.id
+          = f.text_field :name, class: "form-control", required: true
           %h6 Subspecialty:
           = f.grouped_collection_select :subspecialty_id, queue.specialties, :subspecialties, :name, :id, :name, {}, { class: "form-control" }
           %h6 Note (optional):

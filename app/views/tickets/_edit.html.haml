@@ -8,8 +8,6 @@
         .modal-body
           %h6 Name:
           = f.text_field :name, class: "form-control", required: true
-          %h6 Queue:
-          = f.collection_select :service_queue_id, ServiceQueue.all, :id, :name, {}, { class: "form-control", disabled: true }
           %h6 Subspecialty:
           = f.grouped_collection_select :subspecialty_id, ticket.service_queue.specialties, :subspecialties, :name, :id, :name, {}, { class: "form-control" }
           %h6 Note (optional):

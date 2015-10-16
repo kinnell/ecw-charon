@@ -25,7 +25,7 @@
 
           %br
 
-          = f.fields_for :specialties.order(:id) do |s|
+          = f.fields_for :specialties do |s|
             .input-group{ style: "margin-bottom: 10px" }
               .input-group-addon= "Specialty"
               .input-group-addon
@@ -43,7 +43,7 @@
                 %i.fa.fa-trash-o
 
             %ul{ style: "list-style-type: none" }
-              = s.fields_for :subspecialties.order(:id) do |ss|
+              = s.fields_for :subspecialties do |ss|
                 %li
                   .input-group{ style: "margin-bottom: 10px" }
                     .input-group-addon= "Subspecialty"

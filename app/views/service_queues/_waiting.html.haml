@@ -8,7 +8,7 @@
         %th.text-center Created At
         %th.text-center Currently Waiting For
         %th.text-center Est. Wait Time
-        %th{style: "width: 15%"} Actions
+        %th{style: "width: 20%"} Actions
 
     %tbody
       - tickets.waiting.sort_by(&:estimated_waiting_time).each do |ticket|

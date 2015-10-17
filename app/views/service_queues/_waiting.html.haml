@@ -25,6 +25,8 @@
               %span.label.label-primary{style: "background-color: #{ticket.subspecialty.specialty.badge_color}"}
                 = "#{ticket.subspecialty.specialty.name.upcase} - #{ticket.subspecialty.name.upcase}"
           %td.text-center= ticket.created_at.strftime("%l:%M %p")
-          %td.text-center= timeago_tag (ticket.created_at), limit: 20.days.ago
-          %td.text-center= timeago_tag (Time.now - ticket.estimated_waiting_time)
+          -# %td.text-center= timeago_tag (ticket.created_at), limit: 20.days.ago
+          %td.text-center
+          -# %td.text-center= timeago_tag (Time.now - ticket.estimated_waiting_time)
+          %td.text-center
           %td= render "tickets/actions", ticket: ticket

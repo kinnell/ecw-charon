@@ -15,7 +15,7 @@
               %th.col-md-4.text-center= "Estimated Wait Time"
 
           %tbody
-            - service_queue.tickets.waiting.sort_by(&:estimated_waiting_time).each do |ticket|
+            - service_queue.tickets.waiting.each do |ticket|
               %tr{class: ("warning" if ticket.first_in_waiting?)}
                 %td.text-center= ticket.waiting_spot_in_queue
                 %td= ticket.name

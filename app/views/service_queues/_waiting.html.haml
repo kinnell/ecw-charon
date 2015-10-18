@@ -27,6 +27,5 @@
           %td.text-center= ticket.created_at.strftime("%l:%M %p")
           -# %td.text-center= timeago_tag (ticket.created_at), limit: 20.days.ago
           %td.text-center
-          -# %td.text-center= timeago_tag (Time.now - ticket.estimated_waiting_time)
-          %td.text-center
+          %td.text-center= ticket.estimated_waiting_time_in_minutes
           %td= render "tickets/actions", ticket: ticket

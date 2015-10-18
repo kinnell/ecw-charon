@@ -12,6 +12,7 @@ gem "rails-timeago", "~> 2.0"
 
 group :development, :test do
   gem "sqlite3"
+  gem "bullet"
 end
 
 group :production do

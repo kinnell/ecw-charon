@@ -51,19 +51,8 @@ class Ticket < ActiveRecord::Base
     end
   end
 
-  def print_in_minutes(time_in_seconds)
-    "#{(time_in_seconds/60).ceil} min"
-  end
-
   def waiting_spot
     subspecialty.tickets.waiting.index(self)+1 if waiting?
-    # if waiting?
-    #   if subspecialty.available_number_of_workers > subspecialty.tickets.waiting.index(self)
-    #     1
-    #   else
-    #     subspecialty.tickets.waiting.index(self) - subspecialty.available_number_of_workers + 2
-    #   end
-    # end
   end
 
   def waiting_spot_in_queue
@@ -85,11 +74,14 @@ class Ticket < ActiveRecord::Base
         waiting_spot_in_subspecialty * service_queue.average_waiting_time_compounded(10)
       end
     end
-      # max_waiting_time = 30
-      # wait_according_to_time_waited = waiting_time > max_waiting_time*60 ? 1 : (max_waiting_time*60 - waiting_time)
-      # wait_according_to_waiting_spot = service_queue.average_waiting_time_compounded(10) * (waiting_spot - 1)
-      # wait_according_to_waiting_spot
-      # [wait_according_to_time_waited, wait_according_to_waiting_spot].min
+  end
+
+  def estimated_waiting_time_in_minutes
+    if estimated_waiting_time > 0
+      "about #{(estimated_waiting_time.to_f / 60).floor} minutes"
+    else
+      "about less than a minute"
+    end
   end
 
 end

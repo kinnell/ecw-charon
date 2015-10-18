@@ -27,4 +27,9 @@ Charon::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  config.after_initialize do
+    Bullet.enable = false
+    Bullet.alert = false
+  end
 end
+

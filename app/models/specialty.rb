@@ -9,7 +9,7 @@ class Specialty < ActiveRecord::Base
   accepts_nested_attributes_for :subspecialties, allow_destroy: true
 
   def available_number_of_workers
-    number_of_nonspecialized_workers - subspecialties.with_nonspecialized_workers.inject(0){|count, s| count += s.tickets.count}
+    number_of_nonspecialized_workers - subspecialties.with_nonspecialized_workers.inject(0){|count, s| count += s.tickets.being_served.count}
   end
 
   def number_of_nonspecialized_workers

@@ -15,28 +15,18 @@ class Ticket < ActiveRecord::Base
   scope :starred, -> { where(starred: true) }
   scope :not_starred, -> { where(starred: false) }
 
-  def name=(s)
-    super s.titleize
-  end
+  def name=(s) super s.titleize end
 
-  def status
-    if finished_service_at
-      "Served"
-    elsif started_service_at
-      "Being Served"
-    else
-      "Waiting"
-    end
-  end
-
-  def waiting?() status == "Waiting" end
-  def being_served?() status == "Being Served" end
-  def served?() status == "Served" end
+  def waiting?() started_service_at.nil? end
+  def being_served?() (started_service_at?) && (finished_service_at.nil?) end
+  def served?() finished_service_at? end
 
   def color
-    if first_in_waiting? then "warning"
-    elsif being_served? then "success"
-    elsif served? then "active" end
+    if first_in_waiting? then "warning" end
+  end
+
+  def first_in_waiting?
+    waiting_spot == 1 || estimated_waiting_time == 0
   end
 
   def waiting_time
@@ -52,25 +42,23 @@ class Ticket < ActiveRecord::Base
   end
 
   def waiting_spot
-    if waiting?
-      if subspecialty.tickets.waiting.index(self)
-        subspecialty.tickets.waiting.index(self)+1
-      else
-        1
-      end
-    end
+    subspecialty.tickets.waiting.index(self)+1 if waiting? && subspecialty.tickets.waiting.any?
   end
 
   def waiting_spot_in_queue
-    if waiting?
-      if service_queue.tickets.waiting.sort_by(&:estimated_waiting_time).index(self)
-        service_queue.tickets.waiting.sort_by(&:estimated_waiting_time).index(self)+1
-      end
-    end
+    service_queue.tickets.waiting.sort_by(&:estimated_waiting_time).index(self)+1 if waiting? && service_queue.tickets.waiting.any?
   end
 
-  def first_in_waiting?
-    waiting_spot == 1 || estimated_waiting_time == 0
+  def estimated_waiting_time
+    if waiting? && waiting_spot?
+      if waiting_spot <= subspecialty.available_number_of_workers
+        0
+      elsif subspecialty.number_of_workers > 0
+        (waiting_spot / subspecialty.number_of_workers.to_f).ceil * service_queue.average_waiting_time_compounded(10)
+      else
+        waiting_spot * service_queue.average_waiting_time_compounded(10)
+      end  
+    end
   end
 
   def estimated_waiting_time
@@ -78,8 +66,6 @@ class Ticket < ActiveRecord::Base
       waiting_spot_in_subspecialty = subspecialty.tickets.waiting.index(self) ? subspecialty.tickets.waiting.index(self)+1 : 1
       if waiting_spot_in_subspecialty <= subspecialty.available_number_of_workers
         0
-      elsif subspecialty.number_of_workers > 0
-        (waiting_spot_in_subspecialty / subspecialty.number_of_workers.to_f).ceil * service_queue.average_waiting_time_compounded(10)
       else
         waiting_spot_in_subspecialty * service_queue.average_waiting_time_compounded(10)
       end

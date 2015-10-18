@@ -18,8 +18,8 @@ class Ticket < ActiveRecord::Base
   def name=(s) super s.titleize end
 
   def waiting?() started_service_at.nil? end
-  def being_served?() (started_service_at) && (finished_service_at.nil?) end
-  def served?() finished_service_at != nil end
+  def being_served?() (started_service_at.present?) && (finished_service_at.nil?) end
+  def served?() finished_service_at.present? end
 
   def color
     if first_in_waiting? then "warning" end
@@ -53,10 +53,10 @@ class Ticket < ActiveRecord::Base
     if waiting? && waiting_spot
       if waiting_spot <= subspecialty.available_number_of_workers
         0
-      elsif subspecialty.number_of_workers > 0
-        (waiting_spot / subspecialty.number_of_workers.to_f).ceil * service_queue.average_waiting_time_compounded(10)
+      elsif subspecialty.number_of_workers_with_specialty > 0
+        (waiting_spot / (subspecialty.number_of_workers_with_specialty).to_f).floor * service_queue.initial_waiting_time * 60
       else
-        waiting_spot * service_queue.average_waiting_time_compounded(10)
+        waiting_spot * service_queue.initial_waiting_time * 60
       end  
     end
   end

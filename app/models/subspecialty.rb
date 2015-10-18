@@ -13,6 +13,10 @@ class Subspecialty < ActiveRecord::Base
     self.service_queue_id ||= specialty.service_queue.id
   end
 
+  def number_of_workers_with_specialty
+    number_of_workers == 0 ? specialty.number_of_nonspecialized_workers : number_of_workers
+  end
+
   def available_number_of_workers
     if number_of_workers == 0
       specialty.available_number_of_workers

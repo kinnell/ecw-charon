@@ -61,17 +61,6 @@ class Ticket < ActiveRecord::Base
     end
   end
 
-  def estimated_waiting_time
-    if waiting?
-      waiting_spot_in_subspecialty = subspecialty.tickets.waiting.index(self) ? subspecialty.tickets.waiting.index(self)+1 : 1
-      if waiting_spot_in_subspecialty <= subspecialty.available_number_of_workers
-        0
-      else
-        waiting_spot_in_subspecialty * service_queue.average_waiting_time_compounded(10)
-      end
-    end
-  end
-
   def estimated_waiting_time_in_minutes
     if estimated_waiting_time > 0
       "about #{(estimated_waiting_time.to_f / 60).floor} minutes"

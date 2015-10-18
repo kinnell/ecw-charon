@@ -1,0 +1,30 @@
+.panel
+  .panel-heading
+    %h2
+      = @service_queue.name
+
+  .panel-body
+    .table-responsive
+      %table.table.table-bordered.table-hover
+        %thead
+          %tr
+            %th{style: "width: 6.5%"}
+            %th{style: "width: 20%"} Name
+            %th.text-center{style: "width: 10%"} Specialty
+            %th.text-center Created At
+            %th{style: "width: 20%"} Actions
+
+        %tbody
+          - @service_queue.tickets.waiting.each do |ticket|
+            %tr{class: ticket.color}
+              %td
+              %td
+                = ticket.name.truncate(40)
+                - unless ticket.note.blank?
+                  %i.fa.fa-file-text-o.pull-right{style: "opacity: 0.5"}
+              %td.text-center
+                - if ticket.subspecialty
+                  %span.label.label-primary{style: "background-color: #{ticket.subspecialty.specialty.badge_color}"}
+                    = "#{ticket.subspecialty.specialty.name.upcase} - #{ticket.subspecialty.name.upcase}"
+              %td.text-center= ticket.created_at.strftime("%l:%M %p")
+              %td= render "tickets/actions", ticket: ticket

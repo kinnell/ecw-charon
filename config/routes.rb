@@ -5,6 +5,7 @@ Charon::Application.routes.draw do
     patch :update_workforce, on: :member
     get :edit_workforce, on: :member
     get :show_all, on: :collection
+    get :admin_waiting, on: :member
   end
 
 	resources :tickets, only: [:create, :edit, :update] do

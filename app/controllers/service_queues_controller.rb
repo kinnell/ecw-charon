@@ -27,6 +27,10 @@ class ServiceQueuesController < ApplicationController
     @tickets = @service_queue.tickets
   end
 
+  def admin_waiting
+    @service_queue = ServiceQueue.find(params[:id])
+  end
+
   def create
     @service_queue = ServiceQueue.create(service_queue_params)
     redirect_to :back

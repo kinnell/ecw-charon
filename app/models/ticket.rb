@@ -58,16 +58,17 @@ class Ticket < ActiveRecord::Base
   end
 
   def estimated_waiting_time
-    5
-    # if waiting? && waiting_spot
-    #   if waiting_spot <= subspecialty.available_number_of_workers
-    #     0
-    #   elsif subspecialty.number_of_workers_with_specialty > 0
-    #     (waiting_spot / (subspecialty.number_of_workers_with_specialty).to_f).floor * service_queue.initial_waiting_time * 60
-    #   else
-    #     waiting_spot * service_queue.initial_waiting_time * 60
-    #   end  
-    # end
+    if waiting? && waiting_spot
+      if waiting_spot <= subspecialty.available_number_of_workers
+        0
+      elsif subspecialty.number_of_workers_with_specialty > 0
+        (waiting_spot / (subspecialty.number_of_workers_with_specialty).to_f).floor * service_queue.initial_waiting_time * 60
+      else
+        waiting_spot * service_queue.initial_waiting_time * 60
+      end  
+    else
+      5
+    end
   end
 
   def estimated_waiting_time_in_minutes

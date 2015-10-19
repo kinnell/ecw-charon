@@ -17,7 +17,7 @@ class Specialty < ActiveRecord::Base
   end
 
   def number_of_nonspecialized_workers
-    number_of_workers - number_of_specialized_workers
+    [number_of_workers - number_of_specialized_workers, 0].max
   end
 
   def number_of_specialized_workers

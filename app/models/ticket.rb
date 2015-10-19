@@ -42,11 +42,19 @@ class Ticket < ActiveRecord::Base
   end
 
   def waiting_spot
-    subspecialty.tickets.waiting.index(self)+1 if waiting? && subspecialty.tickets.waiting.any?
+    if waiting? && subspecialty.tickets.waiting.any? && subspecialty.tickets.waiting.index(self)
+      subspecialty.tickets.waiting.index(self)+1
+    else
+      0
+    end
   end
 
   def waiting_spot_in_queue
-    service_queue.tickets.waiting.sort_by(&:estimated_waiting_time).index(self)+1 if waiting? && service_queue.tickets.waiting.any?
+    if waiting? && service_queue.tickets.waiting.any? && service_queue.tickets.waiting.sort_by(&:estimated_waiting_time).index(self)
+      service_queue.tickets.waiting.sort_by(&:estimated_waiting_time).index(self)+1
+    else
+      0
+    end
   end
 
   def estimated_waiting_time

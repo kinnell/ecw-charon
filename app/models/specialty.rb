@@ -8,7 +8,7 @@ class Specialty < ActiveRecord::Base
 
   accepts_nested_attributes_for :subspecialties, allow_destroy: true
 
-  def available_number_of_worker
+  def available_number_of_workers
     [number_of_nonspecialized_workers - number_of_nonspecialized_workers_working, 0].max
   end
 

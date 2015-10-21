@@ -27,6 +27,11 @@ class ServiceQueuesController < ApplicationController
     @tickets = @service_queue.tickets
   end
 
+  def download_excel
+    @service_queue = ServiceQueue.find(params[:id])
+    response.headers['Content-Disposition'] = 'attachment; filename="' + @service_queue.name + ' Tickets.xls"'
+  end
+
   def admin_waiting
     @service_queue = ServiceQueue.find(params[:id])
   end

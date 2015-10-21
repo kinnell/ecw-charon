@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="<%= @service_queue.name %>">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Name</Data></Cell>
+        <Cell><Data ss:Type="String">Specialty</Data></Cell>
+        <Cell><Data ss:Type="String">Subspecialty</Data></Cell>
+        <Cell><Data ss:Type="String">Created At</Data></Cell>
+        <Cell><Data ss:Type="String">Started Service At</Data></Cell>
+        <Cell><Data ss:Type="String">Finished Service At</Data></Cell>
+        <Cell><Data ss:Type="String">Note</Data></Cell>
+      </Row>
+    <% @service_queue.tickets.active.each do |ticket| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= ticket.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ticket.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ticket.subspecialty.specialty.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ticket.subspecialty.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ticket.created_at %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ticket.started_service_at %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ticket.finished_service_at %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ticket.note %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

@@ -14,6 +14,8 @@
       .panel-heading
         %h1
           = link_to service_queue.name, manage_service_queue_path(service_queue)
+          = link_to download_excel_service_queue_path(service_queue), class: "btn btn-success pull-right", style: "margin-left: 5px" do
+            %i.fa.fa-arrow-circle-down
           = link_to edit_service_queue_path(service_queue), class: "btn btn-warning pull-right" do
             %i.fa.fa-gear
 
